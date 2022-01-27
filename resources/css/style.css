@@ -1,4 +1,7 @@
-.dacsan{
+.dacsan1{
+    width: 90%;
+}
+.dacsan2{
     width: 90%;
 }
 .logo{
@@ -6,5 +9,6 @@
     border-radius: 50px;
 }
 .header-color{
-    background-color: #04AA6D !important;
+    background-color: #8ACE33!important;
 }
+
