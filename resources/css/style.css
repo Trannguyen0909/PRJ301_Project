@@ -9,6 +9,28 @@
     border-radius: 50px;
 }
 .header-color{
-    background-color: #8ACE33!important;
+    background-color:#313031!important;
+
 }
+.dacsan1{
+    border-bottom: 50px;
+
+}
+.container-fluid{
+    background-color: #313031;
+    margin-top: 20px;
+    
+}
+.carousel-item img{
+    width: 100% !important;
+    height: 800px !important;
+}
+.col-3 p{
+    color: #ffffff;
+}
+
+.header-fontsize li a{
+    color: #ffffff;
+}
+
 
