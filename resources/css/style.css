@@ -1,9 +1,23 @@
-.dacsan1{
+.thittrau-tule{
     width: 90%;
+    border-bottom: 50px;
+    margin-bottom: 30px;
+    
+    
 }
-.dacsan2{
+.lapxuong-banhtrung{
     width: 90%;
+    border-bottom: 50px;
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
+.matong-mangsat{
+    width: 90%;
+    border-bottom: 50px;
+    margin-top: 30px;
+    padding-bottom: 50px;
+}
+
 .logo{
     width: 35%;
     border-radius: 50px;
@@ -12,25 +26,54 @@
     background-color:#313031!important;
 
 }
-.dacsan1{
-    border-bottom: 50px;
 
-}
-.container-fluid{
+.menu{
     background-color: #313031;
-    margin-top: 20px;
+    padding-top: 50px;
     
 }
 .carousel-item img{
     width: 100% !important;
     height: 800px !important;
 }
-.col-3 p{
+.col-3 p2{
     color: #ffffff;
 }
 
 .header-fontsize li a{
     color: #ffffff;
 }
+.dacsan1 div img{
+    width: 300px;
+    height: 200px;
+}
+.dacsan2 div img{
+    width: 300px;
+    height: 200px;
+}
+.dacsan3 div img{
+    width: 300px;
+    height: 200px;
+}
+.col-3 p1{
+    color:rgb(239, 247, 9);
+    margin-left: 70px;
+}
+.footer{
+    background-color: gray;
+    border-top: 2px solid gold;
+    padding-top: 20px;
+}
+.footer ul li{
+    font-size: 15px;
+    color: #ffffff;
+
+}
+span{
+    margin-bottom:  5px !important;
+}
 
 
+.footer-logo img{
+    width: 30px;
+}
