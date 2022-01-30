@@ -1,3 +1,32 @@
+.main-nav{
+    float: right;
+    list-style: none;
+    margin-right: 50px;
+    margin-top: 7px;
+    
+  }
+  .main-nav li{
+    display: inline-block;
+    margin-right: 30px;
+  }
+  
+  .main-nav li a{
+    text-decoration: none;
+    color: white;
+    font-size: 110%;
+    font-weight: 600;
+    transition: border-bottom 0.s;
+    padding: 3px 0;
+  }
+.main-nav li a:hover,
+.main-nav li a:active{
+  border-bottom: 2px solid #cccccc;
+}
+.row{
+    width: 1140px;
+    margin: 0 auto;
+  }
+
 .thittrau-tule{
     width: 90%;
     border-bottom: 50px;
@@ -60,6 +89,7 @@
     margin-left: 70px;
 }
 .footer{
+    width: 100%;
     background-color: gray;
     border-top: 2px solid gold;
     padding-top: 20px;
@@ -69,9 +99,7 @@
     color: #ffffff;
 
 }
-span{
-    margin-bottom:  5px !important;
-}
+
 
 
 .footer-logo img{
