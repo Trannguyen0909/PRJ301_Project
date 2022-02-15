@@ -21,46 +21,23 @@
 .main-nav li a:hover,
 .main-nav li a:active{
   border-bottom: 2px solid #cccccc;
+  color: #ffffff;
 }
 .row{
     width: 1140px;
     margin: 0 auto;
   }
-
-.thittrau-tule{
-    width: 90%;
+.img-intro{
+    width: 100%;
     border-bottom: 50px;
     margin-bottom: 30px;
     
-    
-}
-.lapxuong-banhtrung{
-    width: 90%;
-    border-bottom: 50px;
-    margin-bottom: 30px;
-    margin-top: 30px;
-}
-.matong-mangsat{
-    width: 90%;
-    border-bottom: 50px;
-    margin-top: 30px;
-    padding-bottom: 50px;
 }
 
-.logo{
-    width: 35%;
-    border-radius: 50px;
-}
-.header-color{
-    background-color:#313031!important;
-
+.img-intro div img {
+   margin-left: 35px;
 }
 
-.menu{
-    background-color: #313031;
-    padding-top: 50px;
-    
-}
 .carousel-item img{
     width: 100% !important;
     height: 800px !important;
@@ -101,7 +78,3 @@
 }
 
 
-
-.footer-logo img{
-    width: 30px;
-}
