@@ -11245,4 +11245,206 @@ header.masthead .site-heading .h1 {
   .post-preview > a > .post-title {
     font-size: 2.25rem;
   }
+  #catagorie .block {
+    margin-top: 30px;
+  }
+  
+  #catagorie .block .thumbnail {
+    border: none;
+    cursor: pointer;
+  }
+  #catagorie .block .thumbnail:hover .catagotie-head img {
+   opacity: 0.7;
+  }
+  #catagorie .block .thumbnail a img  {
+    width: 100%;
+    border:1px solid #dedede;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+  }
+  #catagorie .block .thumbnail a img:hover {
+    opacity: 0.7;
+  }
+  #catagorie .block .thumbnail:hover h3 {
+    color: #90c322;
+  }
+  #catagorie .block .thumbnail a  h3 {
+    font-weight: 500;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+  }
+  #catagorie .block .thumbnail .caption p {
+    font-size: 14px;
+    color: #4b4b4b;
+    font-weight: 300;
+  }
+  #catagorie .block .thumbnail .caption {
+    padding: 0;
+  }
+  .catagorie-box p span {
+    font-weight: bold;
+  }
+  .catagorie-box .catagotie-head h3 {
+    color: #121212;
+  }
+  .counters-item {
+    padding-bottom: 30px;
+    color: #444;
+    position: relative;
+    text-align: center;
+  }
+  
+  .counters-item.kill-border:before {
+    background: none;
+  }
+  
+  .counters-item:before {
+    background: #e5e5e5;
+    content: "";
+    margin-top: -27.5px;
+    height: 55px;
+    width: 1px;
+    position: absolute;
+    right: -15px;
+    top: 50%;
+  }
+  
+  .counters-item > div {
+    margin: 6px 0;
+  }
+  
+  .counters-item span {
+    display: inline;
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 50px;
+  }
+  
+  @media (max-width: 480px) {
+    .counters-item span {
+      font-size: 20px;
+    }
+  }
+  
+  .counters-item i {
+    font-size: 40px;
+    display: inline-block;
+    color: #31BB9E;
+  }
+  
+  .counters-item h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #666;
+  }
+  .section {
+    padding: 100px 0;
+  }
+  
+  @media (max-width: 480px) {
+    .section {
+      padding: 40px 0;
+    }
+  }
+  /*=================================================================
+  About us section
+==================================================================*/
+.about {
+  background: #fff;
+}
+
+.about h2 {
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+@media (max-width: 992px) {
+  .about h2 {
+    font-size: 25px;
+  }
+}
+
+.about h4 {
+  font-size: 14px;
+  color: #31BB9E;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.about p {
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+.about .content {
+  padding: 50px 0;
+}
+
+@media (max-width: 992px) {
+  .about .content {
+    padding: 5px 0;
+  }
+}
+  /*=================================================================
+  About us 2 section
+==================================================================*/
+.about-2 {
+  background: #F7F7F7;
+}
+
+.about-2 h2 {
+  margin-bottom: 25px;
+}
+
+.about-2 .bitcoin-graph {
+  width: 100%;
+  height: 400px;
+}
+
+.about-2 .svg-container {
+  overflow: hidden;
+}
+
+@media (max-width: 992px) {
+  .about-2 .svg-container {
+    width: 350px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-2 .svg-container {
+    width: 450px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-2 .svg-container {
+    width: 350px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .about-2 .svg-container {
+    width: 300px !important;
+  }
+}
+.btn-main, .btn-main-sm {
+  background-color: #31BB9E;
+  color: #fff;
+  display: inline-block;
+  font-size: 14px;
+  letter-spacing: 1px;
+  padding: 10px 40px;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+  
 }
