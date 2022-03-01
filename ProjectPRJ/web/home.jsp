@@ -1,3 +1,10 @@
+<%-- 
+    Document   : home
+    Created on : Mar 1, 2022, 4:53:59 PM
+    Author     : FPTSHOP-ACER
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +49,7 @@
     </nav>
     <!-- Page Header-->
     <header class="masthead"
-        style=" background-image: url('/resources/images/hinh-nen-voi-nhung-gam-mau-cua-mu-cang-chai-cua-viet-nam.jpg')">
+        style=" background-image: url('images/hinh-nen-voi-nhung-gam-mau-cua-mu-cang-chai-cua-viet-nam.jpg')">
         <div class="container position-relative px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
@@ -87,7 +94,7 @@
     <!--
 Start About Section
 ==================================== -->
-    <section class="about-2 section bg-white" id="about">
+    <section class="about-2 section bg-gray" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6 align-self-center mb-4" style="padding-right: 10px;">
@@ -102,19 +109,19 @@ Start About Section
                 </div>
                 <div class="col-12 col-md-6">
                     <div id="myDiv">
-                        <img src="/resources/images/tramtau.jpg" style="width: 120%; height: 120%; border-radius: 50px;"
+                        <img src="images/tramtau.jpg" style="width: 120%; height: 120%; border-radius: 50px;"
                             alt="">
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="about-2 section bg-gray" id="about">
+    <section class="about-2 section bg-white" id="about">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-6 px-5">
                     <div id="myDiv">
-                        <img src="/resources/images/mucangchai.jpg"
+                        <img src="images/mucangchai.jpg"
                             style="width: 105%; margin-right: 100%; border-radius: 50px;" alt="">
                     </div>
                 </div>
@@ -133,7 +140,7 @@ Start About Section
             </div>
         </div>
     </section>
-    <section class="about-2 section bg-white" id="about">
+    <section class="about-2 section bg-gray" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6 align-self-center mb-4 mb-md-0">
@@ -152,7 +159,7 @@ Start About Section
                 </div>
                 <div class="col-12 col-md-6">
                     <div id="myDiv">
-                        <img src="/resources/images/nghialo.jpg" style="width: 110%; border-radius: 50px;" alt="">
+                        <img src="images/nghialo.jpg" style="width: 110%; border-radius: 50px;" alt="">
                     </div>
                 </div>
             </div>
@@ -176,7 +183,7 @@ Start Call To Action
     <!--
 Start About Section
 ==================================== -->
-    <section class="service-2 section bg-gray">
+    <section class="service-2 section bg-white">
         <div class="container">
             <div class="row">
                 <div class="col">

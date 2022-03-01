@@ -1,3 +1,10 @@
+<%-- 
+    Document   : amthuc.jsp
+    Created on : Mar 1, 2022, 4:59:39 PM
+    Author     : FPTSHOP-ACER
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,7 +58,7 @@
     </nav>
     <!-- Page Header-->
     <header class="masthead"
-        style="background-image: url('/resources/images/amthuctaybac2.jpg'); margin-bottom: 2px !important;">
+        style="background-image: url('images/amthuctaybac2.jpg'); margin-bottom: 2px !important;">
         <div class="container position-relative px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
@@ -74,7 +81,7 @@
                     <a class="catagotie-head"
                         href="https://luhanhvietnam.com.vn/du-lich/thuong-thuc-banh-chung-den-yen-bai.html">
                         <img style="border: 1px solid rgba(66, 62, 62, 0.363); width: 90%;"
-                            src="/resources/images/banhtrung.jpg"
+                            src="images/banhtrung.jpg"
                             alt="https://luhanhvietnam.com.vn/du-lich/thuong-thuc-banh-chung-den-yen-bai.html">
                         <h3 style="text-align: center; margin-top: 5px; color: #90C346;">Bánh Trưng Đen</h3>
                     </a>
@@ -93,7 +100,7 @@
                     <a class="catagotie-head"
                         href="https://tapchidiaoc.com/lap-xuong-yen-bai-dac-san-nen-thu-khi-den-voi-vung-dat-yen-bai.html#:~:text=L%E1%BA%A1p%20x%C6%B0%E1%BB%9Fng%20Y%C3%AAn%20B%C3%A1i%20l%C3%A0,th%C6%A1m%20ngon%20v%C3%A0%20h%E1%BA%A5p%20d%E1%BA%ABn.">
                         <img style="border: 1px solid rgba(66, 62, 62, 0.363); width: 90%;"
-                            src="/resources/images/lapxuong.jpg" alt="...">
+                            src="images/lapxuong.jpg" alt="...">
                         <h3 style="text-align: center; margin-top: 5px; color: #90C346;">Lạp Xưởng</h3>
                     </a>
                     <div class="caption" style="padding-top: 0%; padding-bottom: 0%; font-size: 17px;">
@@ -110,7 +117,7 @@
                 <div class="thumbnail">
                     <a class="catagotie-head" href="https://www.yenbai.gov.vn/noidung/tintuc/Pages/chi-tiet-tin-tuc.aspx?ItemID=69&l=DacsanYenBai">
                         <img style="border: 1px solid rgba(66, 62, 62, 0.363); width: 96%;"
-                            src="/resources/images/mangsat.jpg" alt="...">
+                            src="images/mangsat.jpg" alt="...">
                         <h3 style="text-align: center; margin-top: 5px; color: #90C346;">Măng sặt</h3>
                     </a>
                     <div class="caption" style="padding-top: 0%; padding-bottom: 0%; font-size: 17px;">
@@ -126,7 +133,7 @@
                 <div class="thumbnail">
                     <a class="catagotie-head" href="https://www.yenbai.gov.vn/noidung/tintuc/Pages/chi-tiet-tin-tuc.aspx?ItemID=59&l=DacsanYenBai&lv=11">
                         <img style="border: 1px solid rgba(66, 62, 62, 0.363); width: 96%;"
-                            src="/resources/images/neptule.jpg" alt="...">
+                            src="images/neptule.jpg" alt="...">
                         <h3 style="text-align: center; margin-top: 5px; color: #90C346;">Nếp tú lệ</h3>
                     </a>
                     <div class="caption" style="padding-top: 0%; padding-bottom: 0%; font-size: 17px;">
@@ -142,7 +149,7 @@
                 <div class="thumbnail">
                     <a class="catagotie-head" href="https://luhanhvietnam.com.vn/du-lich/dac-san-thit-trau-gac-bep-yen-bai.html">
                         <img style="border: 1px solid rgba(66, 62, 62, 0.363); width: 96%;"
-                            src="/resources/images/thittraugacbep.jpg" alt="...">
+                            src="images/thittraugacbep.jpg" alt="...">
                         <h3 style="text-align: center; margin-top: 5px; color: #90C346;">Thịt trâu gác bếp</h3>
                     </a>
                     <div class="caption" style="padding-top: 0%; padding-bottom: 0%; font-size: 17px;">
@@ -158,7 +165,7 @@
                 <div class="thumbnail">
                     <a class="catagotie-head" href="blog-single.html">
                         <img style="border: 1px solid rgba(66, 62, 62, 0.363); width: 96%;"
-                            src="/resources/images/matong.jpg" alt="...">
+                            src="images/matong.jpg" alt="...">
                         <h3 style="text-align: center; margin-top: 5px; color: #90C346;">Mật Ong Hoa nhãn</h3>
                     </a>
                     <div class="caption" style="padding-top: 0%; padding-bottom: 0%; font-size: 17px;">
