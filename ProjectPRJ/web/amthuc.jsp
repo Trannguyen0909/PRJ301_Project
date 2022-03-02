@@ -48,9 +48,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Trang Chủ</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">Ẩm Thực</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Du lịch</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="home.jsp">Trang Chủ</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="amthuc.jsp">Ẩm Thực</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="dulich.jsp">Du lịch</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Liên Hệ</a></li>
                 </ul>
             </div>
@@ -79,10 +79,10 @@
             <div class="col-xl-4 col-md-6">
                 <div class="thumbnail">
                     <a class="catagotie-head"
-                        href="https://luhanhvietnam.com.vn/du-lich/thuong-thuc-banh-chung-den-yen-bai.html">
+                        href="https://vietgiaitri.com/banh-chung-den-muong-lo-mon-dac-san-yen-bai-20220108i6257981/">
                         <img style="border: 1px solid rgba(66, 62, 62, 0.363); width: 90%;"
                             src="images/banhtrung.jpg"
-                            alt="https://luhanhvietnam.com.vn/du-lich/thuong-thuc-banh-chung-den-yen-bai.html">
+                            alt="https://vietgiaitri.com/banh-chung-den-muong-lo-mon-dac-san-yen-bai-20220108i6257981/">
                         <h3 style="text-align: center; margin-top: 5px; color: #90C346;">Bánh Trưng Đen</h3>
                     </a>
                     <div class="caption" style="padding-top: 0%; padding-bottom: 0%; font-size: 17px;">
@@ -147,7 +147,7 @@
             </div> <!-- End of /.col-sm-6 col-md-4 -->
             <div class="col-xl-4 col-md-6">
                 <div class="thumbnail">
-                    <a class="catagotie-head" href="https://luhanhvietnam.com.vn/du-lich/dac-san-thit-trau-gac-bep-yen-bai.html">
+                    <a class="catagotie-head" href="https://thittraugacbep.vn/san-pham/thit-trau-gac-bep/">
                         <img style="border: 1px solid rgba(66, 62, 62, 0.363); width: 96%;"
                             src="images/thittraugacbep.jpg" alt="...">
                         <h3 style="text-align: center; margin-top: 5px; color: #90C346;">Thịt trâu gác bếp</h3>
