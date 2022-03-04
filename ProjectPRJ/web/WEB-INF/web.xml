@@ -5,11 +5,11 @@
         <servlet-class>controller.HomeController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DulichController</servlet-name>
-        <servlet-class>controller.DulichController</servlet-class>
+        <servlet-name>TravelController</servlet-name>
+        <servlet-class>controller.TravelController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DangkyController</servlet-name>
+        <servlet-name>DetailController</servlet-name>
         <servlet-class>controller.DetailController</servlet-class>
     </servlet>
     <servlet>
@@ -21,12 +21,12 @@
         <url-pattern>/Home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DulichController</servlet-name>
-        <url-pattern>/Dulich</url-pattern>
+        <servlet-name>TravelController</servlet-name>
+        <url-pattern>/travel</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DangkyController</servlet-name>
-        <url-pattern>/Dangky</url-pattern>
+        <servlet-name>DetailController</servlet-name>
+        <url-pattern>/detail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FilterGroupController</servlet-name>

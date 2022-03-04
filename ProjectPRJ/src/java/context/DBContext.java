@@ -33,6 +33,6 @@ public class DBContext {
             }
         } catch (Exception ex) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }       
     }
 }

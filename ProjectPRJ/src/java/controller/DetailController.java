@@ -5,8 +5,8 @@
  */
 package controller;
 
-import dal.DetailDao;
-import dal.GroupDao;
+import dal.DetailDAO;
+import dal.GroupDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -36,11 +36,13 @@ public class DetailController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        List<MemberDetail> memberDetail = new DetailDao().getAllMember();
-        List<Group>listGroupById = new GroupDao().getGroupById();
-        request.setAttribute("memberDetail", memberDetail);
-        request.setAttribute("listGroupById", listGroupById);
-        request.getRequestDispatcher("dangky.jsp").forward(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        Group groupByName = new GroupDAO().getGroupById(id);
+        List<MemberDetail> listMember = new DetailDAO().getMemberById(id);
+        request.setAttribute("groupByName", groupByName);
+        request.setAttribute("listMember", listMember);
+            
+        request.getRequestDispatcher("detailmember.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -20,12 +20,13 @@ import lombok.ToString;
 @ToString
 public class MemberDetail {
     private int id;
+    private int groupId;
     private int memberId;
     private String memberName;
     private String gmail;
     private String phone;
     private int price;
-
+    
 
      
 }

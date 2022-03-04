@@ -19,7 +19,10 @@ import model.Group;
  *
  * @author FPTSHOP-ACER
  */
-public class GroupDao { // thao tac voi bang dia diem du lich
+public class GroupDAO { 
+
+    
+// thao tac voi bang dia diem du lich
 
     public List<Group> getAllGroups() {
         List<Group> list = new ArrayList<>();
@@ -48,7 +51,7 @@ public class GroupDao { // thao tac voi bang dia diem du lich
                 list.add(group);
             }
         } catch (Exception ex) {
-            Logger.getLogger(GroupDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
@@ -69,18 +72,18 @@ public class GroupDao { // thao tac voi bang dia diem du lich
                 list.add(group);
             }
         } catch (Exception ex) {
-            Logger.getLogger(GroupDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
 
-    public List<Group> getGroupsByGroupId(int groupId) {
+    public List<Group>getGroupsByGroupId(int groupId) {
        List<Group> list = new ArrayList<>();
         try {
             String sql = "select * from dbo.[Group] where groupid =?";
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(2, groupId);
+            ps.setInt(1, groupId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Group group = Group.builder()
@@ -95,9 +98,35 @@ public class GroupDao { // thao tac voi bang dia diem du lich
                 list.add(group);
             }
         } catch (Exception ex) {
-            Logger.getLogger(GroupDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public Group getGroupById(int id) {
+
+        try {
+            String sql = " select * from dbo.[Group] where dbo.[Group].id =?";
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Group group = Group.builder()
+                        .id(rs.getInt(1))
+                        .groupId(rs.getInt(2))
+                        .groupName(rs.getString(3))
+                        .from_date(rs.getString(4))
+                        .to_date(rs.getString(5))
+                        .quantity(rs.getString(6))
+                        .price(rs.getInt(7))
+                        .build();
+                return group;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

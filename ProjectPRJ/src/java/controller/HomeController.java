@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dal.GroupDao;
+import dal.GroupDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

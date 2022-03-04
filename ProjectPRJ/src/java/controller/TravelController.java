@@ -5,8 +5,8 @@
  */
 package controller;
 
-import dal.DetailDao;
-import dal.GroupDao;
+import dal.DetailDAO;
+import dal.GroupDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,7 +20,7 @@ import model.Group;
  *
  * @author FPTSHOP-ACER
  */
-public class DulichController extends HttpServlet {
+public class TravelController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,13 +35,13 @@ public class DulichController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        List<Group>listGroupById = new GroupDao().getGroupById();
-      
-        List<Group>listGroups = new GroupDao().getAllGroups();
+        List<Group>listGroupById = new GroupDAO().getGroupById();
+        
+        List<Group>listGroups = new GroupDAO().getAllGroups();
         request.setAttribute("listGroupById", listGroupById);
         
         request.setAttribute("listGroups", listGroups);
-        request.getRequestDispatcher("dulich.jsp").forward(request, response);
+        request.getRequestDispatcher("travel.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -11602,6 +11602,24 @@ header.masthead .site-heading .h1 {
   margin-bottom: 6px;
   color: #f9f9f9;
 }
+.search-box input {
+	outline: none;
+	border:none;
+	font-size: 12px;
+	padding: 5px;
+	height: 25px;
+}
+.search-box button {
+	height: 25px;
+	background-color: #fff;
+	padding:10px 16px;
+	background-position: 8px;
+	border: 0;
+	outline: 0;
+}
+.search-box label {
+	display: none;
+}
 
 
   

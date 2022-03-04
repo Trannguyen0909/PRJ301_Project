@@ -84,7 +84,7 @@
                                 <th>Bảng giá(VND)/1 người</th>
                             </tr>
                         </thead>
-                        <c:forEach items="${memberDetail}" var = "M" >
+                        <c:forEach items="${listMember}" var = "M" >
                             <tbody>
                                 <tr> 
                                     <td>${M.memberId}</td>

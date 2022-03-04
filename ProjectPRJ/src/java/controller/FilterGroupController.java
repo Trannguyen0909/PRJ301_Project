@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dal.GroupDao;
+import dal.GroupDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -36,9 +36,11 @@ public class FilterGroupController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             int groupId = Integer.parseInt(request.getParameter("groupId"));
-            List<Group>listGroups= new GroupDao().getGroupsByGroupId(groupId);
+            List<Group>listGroups= new GroupDAO().getGroupsByGroupId(groupId);
+            List<Group>listGroupById = new GroupDAO().getGroupById();
+            request.setAttribute("listGroupById", listGroupById);
             request.setAttribute("listGroups",listGroups);
-            request.getRequestDispatcher("dulich.jsp").forward(request, response);
+            request.getRequestDispatcher("travel.jsp").forward(request, response);
         }
     }
 

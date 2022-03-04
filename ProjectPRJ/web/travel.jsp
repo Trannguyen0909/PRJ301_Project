@@ -59,17 +59,14 @@
                 </div>
             </div>
         </header>
+   
         <div class="container mt-3">
-
-
             <div class="row">
-
-
                 <div class="col-md-3 mb-5"><ul class="list-group">
                         <h3>Du lịch Yên Bái</h3>
                         <c:forEach items="${listGroupById}" var = "G">
 
-                            <li  class="list-group-item"><a href="filter-group?groupId = ${G.groupId}">${G.groupName}</a></li>
+                            <li  class="list-group-item"><a href="filter-group?groupId=${G.groupId}">${G.groupName}</a></li>
                             </c:forEach>                      
                     </ul> </div>
                 <div class="col-md-9 ">
@@ -82,6 +79,7 @@
                                 <th>Ngày Đi</th>
                                 <th>Ngày Về</th>
                                 <th>Bảng giá(VND)</th>
+                                <th>Tìm hiểu thêm</th>
                             </tr>
                         </thead>
                         <c:forEach items="${listGroups}" var = "L" >
@@ -92,6 +90,7 @@
                                     <td>${L.from_date}</td>
                                     <td>${L.to_date}</td>
                                     <td>${L.price}</td>
+                                    <td><a href="detail?Id=${L.id}" type="submit" style="text-decoration: none; box-shadow: 0 3px black; ">Thông tin chi tiết</a></td>
                                 </tr>
                             </tbody>
                         </c:forEach>
@@ -102,47 +101,47 @@
 
         </div>
         <footer class="border-top" style="background-color: #222222">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <ul class="list-inline text-center">
-                        <li class="list-inline-item">
-                            <a href="#!">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#!">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                    <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#!">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="small text-center text-muted fst-italic">
-                        <ul>
-                            <p>Contact Us: </p>
-                            <p>PhoneNumber: 0825274332</p>
-                            <p>Address : 360 Lê Hồng Phong, thành phố Yên Bái, Tỉnh Yên Bái</p>
-                            <p>Gmail: trannguyen19032001@gmail.com.</p>
-
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
                         </ul>
+                        <div class="small text-center text-muted fst-italic">
+                            <ul>
+                                <p>Contact Us: </p>
+                                <p>PhoneNumber: 0825274332</p>
+                                <p>Address : 360 Lê Hồng Phong, thành phố Yên Bái, Tỉnh Yên Bái</p>
+                                <p>Gmail: trannguyen19032001@gmail.com.</p>
+
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
     </body>
 </html>
