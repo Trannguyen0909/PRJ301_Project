@@ -37,8 +37,10 @@ public class DetailController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         int id = Integer.parseInt(request.getParameter("id"));
-        Group groupByName = new GroupDAO().getGroupById(id);
+        List<Group> groupByName = new GroupDAO().getGroupByIdGroup(id);
         List<MemberDetail> listMember = new DetailDAO().getMemberById(id);
+        List<Group>listGroupById = new GroupDAO().getGroupById();
+        request.setAttribute("listGroupById", listGroupById);
         request.setAttribute("groupByName", groupByName);
         request.setAttribute("listMember", listMember);
             

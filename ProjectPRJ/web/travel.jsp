@@ -90,7 +90,7 @@
                                     <td>${L.from_date}</td>
                                     <td>${L.to_date}</td>
                                     <td>${L.price}</td>
-                                    <td><a href="detail?Id=${L.id}" type="submit" style="text-decoration: none; box-shadow: 0 3px black; ">Thông tin chi tiết</a></td>
+                                    <td><a href="detail?id=${L.id}" type="submit" style="text-decoration: none; box-shadow: 0 3px black; ">Thông tin chi tiết</a></td>
                                 </tr>
                             </tbody>
                         </c:forEach>

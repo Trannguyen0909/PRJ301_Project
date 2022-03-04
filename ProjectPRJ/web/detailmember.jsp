@@ -68,10 +68,9 @@
                 <div class="col-md-3 mb-5"><ul class="list-group">
                         <h3>Du lịch Yên Bái</h3>
                         <c:forEach items="${listGroupById}" var = "G">
-
-                            <a href="#" class="list-group-item">${G.groupName}</a>
+                            <a href="filter-group?groupId=${G.groupId}" class="list-group-item">${G.groupName}</a>
                             </c:forEach>                      
-                    </ul> </div>
+                    </ul></div>
                 <div class="col-md-9 ">
                     <h3>Thông tin chi tiết  </h3>
                     <table class="table table-bordered">

@@ -59,15 +59,14 @@ public class GroupDAO {
     public List<Group> getGroupById() {
         List<Group> list = new ArrayList<>();
         try {
-            String sql = "select groupid,groupName from dbo.[Group]\n"
-                    + " group by groupid,groupName  ";
+            String sql = "select groupid,groupName from dbo.[Group] group by groupid,groupName  ";
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Group group = Group.builder()
                         .groupId(rs.getInt(1))
-                        .groupName(rs.getString(2))
+                        .groupName(rs.getString(2))                       
                         .build();
                 list.add(group);
             }
@@ -103,8 +102,8 @@ public class GroupDAO {
         return list;
     }
 
-    public Group getGroupById(int id) {
-
+    public List<Group> getGroupByIdGroup(int id) {
+        List<Group> list = new ArrayList<>();
         try {
             String sql = " select * from dbo.[Group] where dbo.[Group].id =?";
             Connection conn = new DBContext().getConnection();
@@ -113,20 +112,20 @@ public class GroupDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Group group = Group.builder()
-                        .id(rs.getInt(1))
-                        .groupId(rs.getInt(2))
-                        .groupName(rs.getString(3))
-                        .from_date(rs.getString(4))
-                        .to_date(rs.getString(5))
-                        .quantity(rs.getString(6))
-                        .price(rs.getInt(7))
+                        .groupId(rs.getInt(1))
+                        .groupName(rs.getString(2))
+                        .id(rs.getInt(3))
                         .build();
-                return group;
+                list.add(group);
             }
         } catch (Exception ex) {
             Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return list;
     }
 
+
+    
+
+   
 }
