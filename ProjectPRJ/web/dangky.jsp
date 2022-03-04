@@ -1,6 +1,6 @@
 <%-- 
-    Document   : dulich
-    Created on : Mar 1, 2022, 9:44:31 PM
+    Document   : dangky
+    Created on : Mar 3, 2022, 9:39:23 AM
     Author     : FPTSHOP-ACER
 --%>
 
@@ -69,29 +69,29 @@
                         <h3>Du lịch Yên Bái</h3>
                         <c:forEach items="${listGroupById}" var = "G">
 
-                            <li  class="list-group-item"><a href="filter-group?groupId = ${G.groupId}">${G.groupName}</a></li>
+                            <a href="#" class="list-group-item">${G.groupName}</a>
                             </c:forEach>                      
                     </ul> </div>
                 <div class="col-md-9 ">
-                    <h3>Lịch đi và cập nhật địa điểm du lịch Yên Bái </h3>
+                    <h3>Thông tin chi tiết  </h3>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>ID </th>
-                                <th>Điểm Đến</th>
-                                <th>Ngày Đi</th>
-                                <th>Ngày Về</th>
-                                <th>Bảng giá(VND)</th>
+                                <th>Họ và Tên</th>
+                                <th>Gmail</th>
+                                <th>Phone</th>
+                                <th>Bảng giá(VND)/1 người</th>
                             </tr>
                         </thead>
-                        <c:forEach items="${listGroups}" var = "L" >
+                        <c:forEach items="${memberDetail}" var = "M" >
                             <tbody>
-                                <tr>
-                                    <td>${L.id}</td>
-                                    <td>${L.groupName}</td>
-                                    <td>${L.from_date}</td>
-                                    <td>${L.to_date}</td>
-                                    <td>${L.price}</td>
+                                <tr> 
+                                    <td>${M.memberId}</td>
+                                    <td>${M.memberName}</td>
+                                    <td>${M.gmail}</td>
+                                    <td>${M.phone}</td>                                   
+                                    <td>${M.price}</td>
                                 </tr>
                             </tbody>
                         </c:forEach>

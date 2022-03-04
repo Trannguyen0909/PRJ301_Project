@@ -8,6 +8,14 @@
         <servlet-name>DulichController</servlet-name>
         <servlet-class>controller.DulichController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DangkyController</servlet-name>
+        <servlet-class>controller.DetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilterGroupController</servlet-name>
+        <servlet-class>controller.FilterGroupController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>DulichController</servlet-name>
         <url-pattern>/Dulich</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DangkyController</servlet-name>
+        <url-pattern>/Dangky</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterGroupController</servlet-name>
+        <url-pattern>/filter-group</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

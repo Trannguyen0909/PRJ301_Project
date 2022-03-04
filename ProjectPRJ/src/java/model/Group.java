@@ -20,10 +20,11 @@ import lombok.ToString;
 @ToString
 public class Group {
     private int id;
+    private int groupId;
     private String groupName;
     private String from_date;
     private String to_date;
-    private String img;
+    private String quantity;
     private int price;
     
 }

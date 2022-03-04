@@ -9,6 +9,23 @@ package model;
  *
  * @author FPTSHOP-ACER
  */
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Builder
+@Getter
+@Setter
+@ToString
 public class MemberDetail {
-    
+    private int id;
+    private int memberId;
+    private String memberName;
+    private String gmail;
+    private String phone;
+    private int price;
+
+
+     
 }
