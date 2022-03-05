@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dal.CountDAO;
 import dal.DetailDAO;
 import dal.GroupDAO;
 import java.io.IOException;
@@ -14,7 +15,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.CountMember;
 import model.Group;
+import model.MemberDetail;
 
 /**
  *
@@ -35,12 +38,12 @@ public class TravelController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        List<Group>listGroupById = new GroupDAO().getGroupById();
-        
+        List<Group>listGroupById = new GroupDAO().getGroupById();        
         List<Group>listGroups = new GroupDAO().getAllGroups();
-        request.setAttribute("listGroupById", listGroupById);
-        
+//        List<CountMember>numberMember = new CountDAO.getNumberMemBer();
+        request.setAttribute("listGroupById", listGroupById);        
         request.setAttribute("listGroups", listGroups);
+//        request.setAttribute("numberMember" ,numberMember);
         request.getRequestDispatcher("travel.jsp").forward(request, response);
     }
 

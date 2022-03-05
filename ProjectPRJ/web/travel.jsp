@@ -78,21 +78,25 @@
                                 <th>Điểm Đến</th>
                                 <th>Ngày Đi</th>
                                 <th>Ngày Về</th>
-                                <th>Bảng giá(VND)</th>
+<!--                                <th>Số người đã đăng ký</th>-->
+                                <th>Bảng giá(VND)/Nhóm</th>
                                 <th>Tìm hiểu thêm</th>
                             </tr>
                         </thead>
                         <c:forEach items="${listGroups}" var = "L" >
+                          
                             <tbody>
                                 <tr>
                                     <td>${L.id}</td>
                                     <td>${L.groupName}</td>
                                     <td>${L.from_date}</td>
+<!--                                    <td></td>-->
                                     <td>${L.to_date}</td>
                                     <td>${L.price}</td>
                                     <td><a href="detail?id=${L.id}" type="submit" style="text-decoration: none; box-shadow: 0 3px black; ">Thông tin chi tiết</a></td>
                                 </tr>
                             </tbody>
+                            
                         </c:forEach>
 
                     </table>

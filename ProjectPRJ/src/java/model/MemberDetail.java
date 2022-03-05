@@ -25,6 +25,7 @@ public class MemberDetail {
     private String memberName;
     private String gmail;
     private String phone;
+    private int quantity;    
     private int price;
     
 
