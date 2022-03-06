@@ -39,8 +39,8 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="home.jsp">Trang chủ</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="amthuc.jsp">Ẩm Thực</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="dulich.jsp">Du lịch</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="food.jsp">Ẩm Thực</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="travel.jsp">Du lịch</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Liên Hệ</a></li>
                     </ul>
                 </div>
@@ -67,12 +67,22 @@
 
                 <div class="col-md-3 mb-5"><ul class="list-group">
                         <h3>Du lịch Yên Bái</h3>
-                        <c:forEach items="${listGroupById}" var = "G">
+                        <c:forEach items="${sessionScope.listGroupById}" var = "G">
                             <a href="filter-group?groupId=${G.groupId}" class="list-group-item">${G.groupName}</a>
                         </c:forEach>                      
                     </ul></div>
                 <div class="col-md-9 ">
                     <h3>Thông tin chi tiết  </h3>
+                    <form action = "search"class="d-flex mx-auto">
+                        <input class="form-control me-2"
+                               type = "search"
+                               placeholder="Search"
+                               aria-label="Search"
+                               name="keyword"/>
+                        <button class="btn - btn-outline-success" type="submit">
+                            Search
+                        </button>
+                    </form>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -94,66 +104,13 @@
                                 </tr>
                             </tbody>
                         </c:forEach>
-
+                            
                     </table>
-                    <nav aria-label="..." class="d-flex justify-content-center">
-                       
-                        <ul class="pagination pagination-sm">
-                                                                                
-                            <li  class="page-item ${i==page?"active":""}" aria-current="page">
-                                <span class="page-link">1</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="detail?${link}&page=2">2</a></li>
-                            <li class="page-item"><a class="page-link" href="detail?${link}&page=3">3</a></li>
-                         
-                        </ul>
-                    </nav>
+                    <button type="button" class="btn btn-success">Đăng ký chuyến đi</button>
                 </div>
             </div>
 
         </div>
-        <footer class="border-top" style="background-color: #222222">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <ul class="list-inline text-center">
-                            <li class="list-inline-item">
-                                <a href="#!">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#!">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#!">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="small text-center text-muted fst-italic">
-                            <ul>
-                                <p>Contact Us: </p>
-                                <p>PhoneNumber: 0825274332</p>
-                                <p>Address : 360 Lê Hồng Phong, thành phố Yên Bái, Tỉnh Yên Bái</p>
-                                <p>Gmail: trannguyen19032001@gmail.com.</p>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <%@include file ="components/footerComponent.jsp" %>
     </body>
 </html>

@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Group;
 import model.MemberDetail;
 
@@ -39,19 +40,11 @@ public class DetailController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         List<Group> groupByName = new GroupDAO().getGroupByIdGroup(id);
         List<MemberDetail> listMember = new DetailDAO().getMemberById(id);        
-        List<Group>listGroupById = new GroupDAO().getGroupById();
-        List<Group>listGroups = new GroupDAO().getAllGroups();
-        request.setAttribute("listGroupById", listGroupById);
+        
+        request.setAttribute("listMember", listMember);
         request.setAttribute("groupByName", groupByName);
-        int page=1;
-        String pageStr = request.getParameter("page");
-        if(pageStr!=null){
-            page = Integer.parseInt(pageStr);
-        }
-        request.setAttribute("link","id="+id);
-        final int PAGE_SIZE = 4;
-        request.setAttribute("listMember", listMember.subList((page-1)*PAGE_SIZE, page*PAGE_SIZE));
-        request.setAttribute("listGroups", listGroups);
+       
+       
         request.getRequestDispatcher("detailmember.jsp").forward(request, response);
     }
 

@@ -19,16 +19,14 @@ import model.Group;
  *
  * @author FPTSHOP-ACER
  */
-public class GroupDAO { 
+public class GroupDAO {
 
-    
 // thao tac voi bang dia diem du lich
-
     public List<Group> getAllGroups() {
         List<Group> list = new ArrayList<>();
         try {
             String sql = "SELECT [id]\n"
-                    + "      ,[groupId]\n"
+                    + "      ,[groupid]\n"
                     + "      ,[groupname]\n"
                     + "      ,[from_date]\n"
                     + "      ,[to_date]\n"
@@ -66,7 +64,7 @@ public class GroupDAO {
             while (rs.next()) {
                 Group group = Group.builder()
                         .groupId(rs.getInt(1))
-                        .groupName(rs.getString(2))                       
+                        .groupName(rs.getString(2))
                         .build();
                 list.add(group);
             }
@@ -76,8 +74,8 @@ public class GroupDAO {
         return list;
     }
 
-    public List<Group>getGroupsByGroupId(int groupId) {
-       List<Group> list = new ArrayList<>();
+    public List<Group> getGroupsByGroupId(int groupId) {
+        List<Group> list = new ArrayList<>();
         try {
             String sql = "select * from dbo.[Group] where groupid =?";
             Connection conn = new DBContext().getConnection();
@@ -124,8 +122,4 @@ public class GroupDAO {
         return list;
     }
 
-
-    
-
-   
 }

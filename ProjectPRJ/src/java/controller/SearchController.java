@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dal.DetailDAO;
 import dal.GroupDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,12 +15,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Group;
+import model.MemberDetail;
 
 /**
  *
  * @author FPTSHOP-ACER
  */
-public class FilterGroupController extends HttpServlet {
+public class SearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,12 +37,13 @@ public class FilterGroupController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int groupId = Integer.parseInt(request.getParameter("groupId"));
-            
-            List<Group>groupsByGroupId = new GroupDAO().getGroupsByGroupId(groupId);
-            request.setAttribute("groupsByGroupId", groupsByGroupId);
            
-            request.getRequestDispatcher("travelDetail.jsp").forward(request, response);
+           String keyword = request.getParameter("keyword");
+          
+           
+           List<MemberDetail> listMember = new DetailDAO().search(keyword);
+           request.setAttribute("listMember", listMember);
+           request.getRequestDispatcher("detailmember.jsp").forward(request, response);
         }
     }
 

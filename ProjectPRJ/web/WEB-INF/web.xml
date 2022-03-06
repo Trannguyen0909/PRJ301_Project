@@ -16,6 +16,10 @@
         <servlet-name>FilterGroupController</servlet-name>
         <servlet-class>controller.FilterGroupController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchController</servlet-name>
+        <servlet-class>controller.SearchController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>FilterGroupController</servlet-name>
         <url-pattern>/filter-group</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

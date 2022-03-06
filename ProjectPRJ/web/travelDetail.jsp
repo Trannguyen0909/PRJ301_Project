@@ -1,6 +1,6 @@
 <%-- 
-    Document   : dulich
-    Created on : Mar 1, 2022, 9:44:31 PM
+    Document   : travelDetail.jsp
+    Created on : Mar 6, 2022, 1:41:27 PM
     Author     : FPTSHOP-ACER
 --%>
 
@@ -71,7 +71,7 @@
                     </ul> </div>
                 <div class="col-md-9 ">
                     <h3>Lịch đi và cập nhật địa điểm du lịch Yên Bái </h3>
-                    <table class="table table-bordered" style="font-size: 17px">
+                    <table class="table table-bordered" style="font-size: 20px">
                         <thead>
                             <tr>
                                 <th>ID </th>
@@ -83,7 +83,7 @@
                                 <th>Tìm hiểu thêm</th>
                             </tr>
                         </thead>
-                        <c:forEach items="${listGroups}" var = "L" >
+                        <c:forEach items="${groupsByGroupId}" var = "L" >
                           
                             <tbody>
                                 <tr>
@@ -98,21 +98,9 @@
                             </tbody>
                             
                         </c:forEach>
-                           
-     
+
                     </table>
-                     <nav aria-label="..." class="d-flex justify-content-center">
-                       
-                        <ul class="pagination pagination-sm">
-                                                                                
-                            <li  class="page-item ${i==page?"active":""}" aria-current="page">
-                                <span class="page-link">1</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="detail?${link}&page=2">2</a></li>
-                            <li class="page-item"><a class="page-link" href="detail?${link}&page=3">3</a></li>
-                         
-                        </ul>
-                    </nav>
+                    
                 </div>
             </div>
 
