@@ -51,7 +51,7 @@ public class DetailDAO {
     }
 
     
-    public int count(int id){     
+    public int countMember(int id){     
         try {
             String sql = "select COUNT(*) as numberMember from dbo.detail group by id having id =?";
             Connection conn = new DBContext().getConnection();
@@ -66,6 +66,7 @@ public class DetailDAO {
         }
         return 0;
 }
+    
 
     public List<MemberDetail> search(String keyword) {
        List<MemberDetail> list = new ArrayList<>();

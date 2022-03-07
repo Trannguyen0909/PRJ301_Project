@@ -27,26 +27,7 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="home.jsp">Trang chủ</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="food.jsp">Ẩm Thực</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="travel.jsp">Du lịch</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Liên Hệ</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Page Header-->
+         <%@include file ="components/navBarComponent.jsp" %>        <!-- Page Header-->
         <header class="masthead"
                 style=" background-image: url('images/hinh-nen-voi-nhung-gam-mau-cua-mu-cang-chai-cua-viet-nam.jpg')">
             <div class="container position-relative px-4 px-lg-5">
@@ -59,7 +40,7 @@
                 </div>
             </div>
         </header>
-   
+
         <div class="container mt-3">
             <div class="row">
                 <div class="col-md-3 mb-5"><ul class="list-group">
@@ -78,45 +59,43 @@
                                 <th>Điểm Đến</th>
                                 <th>Ngày Đi</th>
                                 <th>Ngày Về</th>
-<!--                                <th>Số người đã đăng ký</th>-->
+                                <!--                                <th>Số người đã đăng ký</th>-->
                                 <th>Bảng giá(VND)/Nhóm</th>
                                 <th>Tìm hiểu thêm</th>
                             </tr>
                         </thead>
                         <c:forEach items="${listGroups}" var = "L" >
-                          
+
                             <tbody>
                                 <tr>
                                     <td>${L.id}</td>
                                     <td>${L.groupName}</td>
                                     <td>${L.from_date}</td>
-<!--                                    <td></td>-->
+                                    <!--                                    <td></td>-->
                                     <td>${L.to_date}</td>
                                     <td>${L.price}</td>
                                     <td><a href="detail?id=${L.id}" type="submit" style="text-decoration: none; box-shadow: 0 3px black; ">Thông tin chi tiết</a></td>
                                 </tr>
                             </tbody>
-                            
+
                         </c:forEach>
-                           
-     
+
+
                     </table>
-                     <nav aria-label="..." class="d-flex justify-content-center">
-                       
+                    <nav aria-label="..." class="d-flex justify-content-center">
+
                         <ul class="pagination pagination-sm">
-                                                                                
-                            <li  class="page-item ${i==page?"active":""}" aria-current="page">
-                                <span class="page-link">1</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="detail?${link}&page=2">2</a></li>
-                            <li class="page-item"><a class="page-link" href="detail?${link}&page=3">3</a></li>
-                         
+                            <c:forEach begin="1" end="${totalPage}" var="i">    
+                                
+                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="travel?page=${i}">${i}</a></li>
+                               
+                                </c:forEach> 
                         </ul>
                     </nav>
                 </div>
             </div>
 
         </div>
-         <%@include file ="components/footerComponent.jsp" %>
+        <%@include file ="components/footerComponent.jsp" %>
     </body>
 </html>

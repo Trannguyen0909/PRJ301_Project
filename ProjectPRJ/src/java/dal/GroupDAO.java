@@ -122,4 +122,53 @@ public class GroupDAO {
         return list;
     }
 
+    public List<Group> getGroupWithPagging(int page, int PAGE_SIZE) {
+        List<Group> list = new ArrayList<>();
+        try {
+            String sql = "with t as (select ROW_NUMBER() over (order by g.id asc) as r ,* from dbo.[Group] as g )\n"
+                    + "select* from t where r between ?*?-(?-1) and ?*?";
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, page);
+            ps.setInt(2, PAGE_SIZE);
+            ps.setInt(3, PAGE_SIZE);
+            ps.setInt(4, page);
+            ps.setInt(5, PAGE_SIZE);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Group group = Group.builder()
+                        .id(rs.getInt(2))
+                        .groupId(rs.getInt(3))
+                        .groupName(rs.getString(4))
+                        .from_date(rs.getString(5))
+                        .to_date(rs.getString(6))
+                        .quantity(rs.getString(7))
+                        .price(rs.getInt(8))
+                        .build();
+                list.add(group);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public int getTotalGroup() {
+       
+        try {
+            String sql = "select count(id) from dbo.[group] ";
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                
+                return rs.getInt(1);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
 }

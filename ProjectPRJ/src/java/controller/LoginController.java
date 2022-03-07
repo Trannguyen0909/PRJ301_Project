@@ -5,26 +5,18 @@
  */
 package controller;
 
-
-import dal.DetailDAO;
-import dal.GroupDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import model.Group;
-import model.MemberDetail;
 
 /**
  *
  * @author FPTSHOP-ACER
  */
-public class TravelController extends HttpServlet {
+public class LoginController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,33 +29,19 @@ public class TravelController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-          int page=1;
-        final int PAGE_SIZE =10;
-        String pageStr = request.getParameter("page");
-        if(pageStr!=null){
-            page = Integer.parseInt(pageStr);
-            
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet LoginController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        int totalGroup = new GroupDAO().getTotalGroup();
-        int totalPage = totalGroup/PAGE_SIZE;
-        if(totalGroup%PAGE_SIZE!=0){
-            totalPage+=1;
-        }
-        List<Group> listGroups = new GroupDAO().getGroupWithPagging(page,PAGE_SIZE);
-        List<Group>listGroupById = new GroupDAO().getGroupById();        
-//        List<Group>listGroups = new GroupDAO().getAllGroups();
-        HttpSession session = request.getSession();
-        session.setAttribute("listGroupById", listGroupById);
-        request.setAttribute("listGroups",listGroups);
-        request.setAttribute("page", page);
-        request.setAttribute("totalPage", totalPage);
-        DetailDAO detaildao = new DetailDAO();
-       
-//        int count = detaildao.count(id);
-        
-        request.getRequestDispatcher("travel.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

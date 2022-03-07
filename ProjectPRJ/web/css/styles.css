@@ -11620,6 +11620,34 @@ header.masthead .site-heading .h1 {
 .search-box label {
 	display: none;
 }
+.account {
+  background: #31BB9E;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account h2 {
+  color: #fff;
+}
+
+.account p {
+  color: #fff;
+}
+
+.account a {
+  color: #fff;
+  font-weight: bold;
+}
+
+.account .block form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 46px -4px rgba(0, 0, 0, 0.28);
+}
+
 
 
   
