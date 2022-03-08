@@ -5,12 +5,15 @@
  */
 package controller;
 
+import dal.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -29,18 +32,32 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+
+            Account account = new AccountDAO().login(username, password);
+            if (account != null) {
+                request.setAttribute("classAlert", "");
+                request.setAttribute("strongAlert", "");
+                request.setAttribute("alert", "");
+                request.setAttribute("account", account);
+                HttpSession session =  request.getSession();              
+                session.setAttribute("account", account);
+                response.sendRedirect("Home");
+                
+                
+            } else {
+                request.setAttribute("classAlert", "alert alert-danger");
+                request.setAttribute("strongAlert", "Cảnh báo");
+                request.setAttribute("alert", "Bạn đã nhập sai tài khoản hoặc mật khẩu!Xin vui lòng nhập lại!");
+                
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
+            
+
         }
     }
 

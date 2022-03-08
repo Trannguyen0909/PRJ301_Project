@@ -160,8 +160,79 @@
                 </div> <!-- End of /.thumbnail -->
             </div> <!-- End of /.col-sm-6 col-md-4 -->
         </div>
-    </section>
-
+    </section> 
+    <section class="blog section" id="blog" style="padding-top: 30px; " >
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="title-food text-center">
+                                    <h4 style="border-top: 1px solid gray; padding-top: 20px">Có thể bạn chưa biết</h4>
+					<h2>Về văn hóa dân tộc Yên Bái.</h2>
+					<span class="border"></span>
+                                        <p style="font-size: 16px">Yên Bái là vùng đất được biết đến bởi những dấu ấn riêng biệt - đặc biệt về văn hóa.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<!-- single blog post -->
+			<article class="col-12 col-md-6" >
+				<div class="post-item">
+					<div class="post-thumb">
+                                            <img class="img-fluid shadow rounded"  src="images/trangphuc.jpg" alt="">
+					</div>
+			  		<div class="post-title">
+                                            <h3 class="mt-2" style="font-size: 20px; font-family: cursive;"><a href="">Những nét đặc trưng về trang phục  </a></h3>
+			  		</div>
+                                    <div class="post-meta" style="font-size: 15px;" >
+			  			<span>By</span> <a href="" class=""> VietNamPlus.vn</a>
+			  		</div>
+			  		<div class="post-content">
+                                            <p class="my-3">Trong dòng chảy của cuộc sống hiện đại, 
+                                                dân tộc Mông ở Yên Bái là một trong những dân tộc còn bảo 
+                                                lưu được nhiều sắc thái văn hóa độc đáo. Những giá trị văn hóa ấy luôn 
+                                                được các thế hệ người Mông nơi đây tự hào, gìn giữ, phát huy và bảo tồn 
+                                                cùng với tình yêu quê hương, xứ sở. Trang phục các dân tộc là một nét văn hóa đẹp, 
+                                                 nói lên phong tục, cách sống… của tộc người đó.</p>
+			  		</div>
+				    <a class="btn btn-main " style="background-color: #90C346; " href="#">Tìm hiểu thêm</a>
+				</div>
+			</article>
+			<!-- /single blog post -->
+			
+			<!-- single blog post -->
+				<article class="col-12 col-md-6" >
+					<div class="post-item">
+						<div class="post-thumb">
+                                                    <img class="img-fluid shadow rounded" src="images/anhmuaxoethai.jpg" alt="">
+						</div>
+				  		<div class="post-title">
+					    	<h3 class="mt-2" style="font-size: 20px; font-family: cursive;"><a href="">Nghệ thuật xòe Thái ở Yên Bái</a></h3>
+				  		</div>
+				  		<div class="post-meta" style="font-size: 15px;">
+				  			<ul class="list-inline">
+				  				<li class="list-inline-item">
+				  					<span>By</span> <a href="" class="">Yenbai.gov</a>		
+				  				</li>
+				  				<li class="list-inline-item">
+				  					<span>By</span> <span> 6th February 2022</span>		
+				  				</li>
+							</ul>
+				  		</div>
+				  		<div class="post-content ">
+                                                    <p class="my-3">Ở Mường Lò (Yên Bái) - cái nôi của Nghệ thuật Xòe Thái hiện có hàng 
+                                                        nghìn nghệ nhân có thể xòe hay, xòe bài bản và thể hiện được hết tâm tư, tình cảm
+                                                        trong mỗi động tác. Mường Lò hiện cũng đã đưa xòe Thái vào truyền dạy trong các
+                                                        trường học, với mong muốn ngày càng có nhiều thế hệ tiếp nối yêu thích và quan tâm
+                                                        lưu giữ nét đẹp văn hóa đặc sắc này của dân tộc. </p>
+				  		</div>
+                                            <a class="btn btn-main" style="background-color: #90C346; " href="#">Tìm hiểu thêm</a>
+					</div>
+				</article>
+			<!-- end single blog post -->
+			
+		</div> <!-- end row -->
+	</div> <!-- end container -->
+</section> <!-- end section -->
 
     <!-- Footer-->
     <footer class="border-top" style="background-color: #222222">

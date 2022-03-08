@@ -21,6 +21,7 @@ public class Account {
     private int id;
     private String username;
     private String password;
+    private String displayName;
     private String address;
     private String email;
     private String phone;

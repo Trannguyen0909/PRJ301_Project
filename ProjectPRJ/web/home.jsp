@@ -25,6 +25,7 @@
             rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/stylesBit.css" rel="stylesheet" />
     </head>
 
     <body>
@@ -86,7 +87,7 @@
                                 mình vào thiên nhiên hoang sơ, núi rừng hùng vĩ khám phá những điều mới lạ từ thiên nhiên và
                                 nền văn hóa đặc trưng của đồng bào dân tộc Mông, dân tộc Thái. Đặc biệt, du khách được trải
                                 nghiệm các hoạt động du lịch mạo hiểm, cộng đồng, nghỉ dưỡng...</p>
-                            <a href="#" class="btn btn-main">Tìm Hiểu Thêm</a>
+                            <a href="filter-group?groupId=102" class="btn btn-main">Tham Gia Ngay</a>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -115,7 +116,7 @@
                                 vời của mảnh đất vùng cao này. Đến với nơi đây, du khách không chỉ được thưởng ngoạn vẻ đẹp
                                 của những thửa ruộng bậc thang, những biển mây trắng trên đỉnh đèo Cao Phạ mà còn được đắm
                                 mình vào những lễ hội văn hóa độc đáo của đồng bào Mông...</p>
-                            <a href="#" class="btn btn-main" style="margin-left: 35%;">Tìm Hiểu Thêm</a>
+                            <a href="filter-group?groupId=101" class="btn btn-main" style="margin-left: 35%;">Tham Gia Ngay</a>
                         </div>
                     </div>
 
@@ -136,7 +137,7 @@
                                 Mường Lò với lễ hội ruộng bậc thang Mù Cang Chải. Nếu tới Nghĩa Lộ vào tầm tháng 2 hoặc
                                 tháng 3 bạn sẽ được tham gia những lễ hội của người dân địa phương và khám phá nền văn hóa
                                 của dân tộc vùng cao...</p>
-                            <a href="#" class="btn btn-main">Tìm Hiểu Thêm</a>
+                            <a href="filter-group?groupId=103" class="btn btn-main">Tham Gia Ngay</a>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -154,9 +155,9 @@
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="Home">1</a></li>
+                <li class="page-item"><a class="page-link" href="homePaggingSecond.jsp">2</a></li>
+                <li class="page-item"><a class="page-link" href="homePaggingThird.jsp">3</a></li>
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
