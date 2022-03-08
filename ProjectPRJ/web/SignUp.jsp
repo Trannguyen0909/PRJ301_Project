@@ -1,18 +1,19 @@
 <%-- 
-    Document   : login.jsp
-    Created on : Mar 7, 2022, 2:02:59 PM
+    Document   : SignUp
+    Created on : Mar 8, 2022, 8:37:37 PM
     Author     : FPTSHOP-ACER
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Clean Blog - Start Bootstrap Theme</title>
+        <title></title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
@@ -62,24 +63,39 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 mx-auto">
-                        <div class="block mt-3">
-                            <h2 style="font-size: 28px" class="text-center mb-2">Đăng nhập để tham gia cùng chúng tôi!</h2>
-
-                            <form  class="text-left clearfix mt-50" action="login" >
-                                <div class="${classAlert}">
+                        <div class="block text-center">
+                            <h2 class="text-center">Tạo tài khoản của bạn</h2>
+                            <form class="text-left clearfix mt-30" action="SignUp" method="POST">
+                              
+                               <div class="${classAlert}">
                                     <strong>${strongAlert}</strong> ${alert}
                                 </div>
                                 <div class="form-group">
-                                    <input type="username" class="form-control"  placeholder="Username" name="username">
+                                    <input type="text" class="form-control"  placeholder="Username" name="username">
                                 </div>
-                                <div class="form-group my-2" >
-                                    <input type="password" class="form-control" placeholder="Password" name="password">
+                                 <div class="form-group">
+                                     <input type="password" class="form-control my-2"  placeholder="Password" name="password">
                                 </div>
-                                <button type="submit" class="btn btn-main" >Đăng nhập</button>
-
+                                  <div class="form-group">
+                                      <input type="password" class="form-control "  placeholder="Re-enterPassword" name="re_password">
+                                </div>
+                                  <div class="form-group">
+                                      <input type="text" class="form-control my-2 "  placeholder="YourName" name="displayName" >
+                                </div>
+                                 <div class="form-group">
+                                     <input type="text" class="form-control "  placeholder="Address" name="address">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control my-2 "  placeholder="Email" name="email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control "  placeholder="PhoneNumber" name="phone">
+                                </div>
+                               
+                                <button type="submit" class="btn btn-main text-center my-2">Sign In</button>
                             </form>
-                            <p class="mt-20">Bạn chưa có tài khoản?<a href="SignUp"> Hãy đăng ký ngay</a></p>
-                            <p><a href="SignUp">Quên mật khẩu?</a></p>
+                            <p class="mt-20">Bạn đã có tài khoản?<a href="login"> Đăng nhập</a></p>
+
                         </div>
                     </div>
                 </div>

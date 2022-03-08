@@ -27,7 +27,17 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="login.jsp">Đăng nhập</a></li>
                         </c:when>
                         <c:otherwise>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="logout">Đăng xuất</a></li>
+                        <div class="dropdown">
+                           
+                            <button type="button" class="btn dropdown-toggle text-light admin" data-bs-toggle="dropdown" >
+                                ${sessionScope.account.displayName}
+                            </button>
+
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="dropdown-item" href="logout">Đăng xuất</a></li>                               
+                            </ul>
+                        </div>
+
                     </c:otherwise>
                 </c:choose>
             </ul>

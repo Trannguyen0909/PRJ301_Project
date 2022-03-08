@@ -12,14 +12,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import model.Account;
 
 /**
  *
  * @author FPTSHOP-ACER
  */
-public class LoginController extends HttpServlet {
+public class SignUpController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,30 +31,8 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-
-            Account account = new AccountDAO().login(username, password);
-            if (account != null) {              
-                request.setAttribute("account", account);
-                HttpSession session =  request.getSession();              
-                session.setAttribute("account", account);
-                response.sendRedirect("Home");
-                
-                
-            } else {
-                request.setAttribute("classAlert", "alert alert-danger");
-                request.setAttribute("strongAlert", "Cảnh báo");
-                request.setAttribute("alert", "Bạn đã nhập sai tài khoản hoặc mật khẩu!Xin vui lòng nhập lại!");
-                
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
-            
-
-        }
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -70,7 +47,9 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        request.getRequestDispatcher("SignUp.jsp").forward(request, response);
     }
 
     /**
@@ -84,7 +63,35 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String re_password = request.getParameter("re_password");
+        String displayName = request.getParameter("displayName");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("Phone");
+        
+        
+        if (!password.equals(re_password)) { //neu repassword khac pass word
+            request.setAttribute("classAlert", "alert alert-danger");
+            request.setAttribute("strongAlert", "Cảnh báo");
+            request.setAttribute("alert", "Mật khẩu không trùng khớp! Vui lòng nhập lại.");              
+            response.sendRedirect("SignUp.jsp");
+        } else {
+            AccountDAO account = new AccountDAO();
+            Account a = account.checkAccountExist(username);
+            if (a == null) { //chua co =>sign up
+                account.signup(username, password, username, password, username, password, true);
+                response.sendRedirect("login.jsp");
+            } else {
+                request.setAttribute("classAlert", "alert alert-danger");
+                request.setAttribute("strongAlert", "Cảnh báo");
+                request.setAttribute("alert", "Tài khoản của bạn đã có người sử dụng vui lòng nhập tài khoản khác!");
+                response.sendRedirect("SignUp.jsp");
+            }
+        }
     }
 
     /**

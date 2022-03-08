@@ -11451,7 +11451,7 @@ header.masthead .site-heading .h1 {
 ==================================================================*/
 .call-to-action {
   padding: 100px 0;
-  background-color: #31BB9E;
+  background-color:#31BB9E;
   color: #fff;
 }
 
@@ -11466,7 +11466,20 @@ header.masthead .site-heading .h1 {
 .call-to-action .btn-main, .call-to-action .btn-main-sm {
   margin-top: 20px;
   background: #fff;
-  color: #31BB9E;
+  color:#31BB9E;
+}
+
+.call-to-action-food {
+  padding: 100px 0;
+  background-color:#90C346;
+  color: #fff;
+}
+
+
+.call-to-action-food .btn-main, .call-to-action-food .btn-main-sm {
+  margin-top: 20px;
+  background: #fff;
+  color:#90C346;
 }
 /*=================================================================
  Start About Section
@@ -11697,5 +11710,4 @@ header.masthead .site-heading .h1 {
   margin-bottom: 10px;
 }
 
-  
 }
