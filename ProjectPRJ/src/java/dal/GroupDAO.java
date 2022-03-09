@@ -43,7 +43,7 @@ public class GroupDAO {
                         .groupName(rs.getString(3))
                         .from_date(rs.getString(4))
                         .to_date(rs.getString(5))
-                        .quantity(rs.getString(6))
+                        .quantity(countMemberId(rs.getInt(1)))
                         .price(rs.getInt(7))
                         .build();
                 list.add(group);
@@ -89,7 +89,7 @@ public class GroupDAO {
                         .groupName(rs.getString(3))
                         .from_date(rs.getString(4))
                         .to_date(rs.getString(5))
-                        .quantity(rs.getString(6))
+                        .quantity(countMemberId(rs.getInt(1)))
                         .price(rs.getInt(7))
                         .build();
                 list.add(group);
@@ -98,6 +98,21 @@ public class GroupDAO {
             Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+     public int countMemberId(int id) {
+        try {
+            String sql = "select COUNT(*) from detail where id =?";
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+               return rs.getInt(1);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 
     public List<Group> getGroupByIdGroup(int id) {
@@ -142,7 +157,7 @@ public class GroupDAO {
                         .groupName(rs.getString(4))
                         .from_date(rs.getString(5))
                         .to_date(rs.getString(6))
-                        .quantity(rs.getString(7))
+                        .quantity(countMemberId(rs.getInt(2)))
                         .price(rs.getInt(8))
                         .build();
                 list.add(group);

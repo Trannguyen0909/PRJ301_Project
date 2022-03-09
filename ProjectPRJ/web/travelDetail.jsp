@@ -20,6 +20,8 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
               type="text/css" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link
             href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
             rel="stylesheet" type="text/css" />
@@ -54,14 +56,14 @@
                     </ul> </div>
                 <div class="col-md-9 ">
                     <h3>Lịch đi và cập nhật địa điểm du lịch Yên Bái </h3>
-                    <table class="table table-bordered" style="font-size: 20px">
+                    <table class="table table-bordered" style="font-size: 16px">
                         <thead>
                             <tr>
                                 <th>ID </th>
                                 <th>Điểm Đến</th>
                                 <th>Ngày Đi</th>
                                 <th>Ngày Về</th>
-<!--                                <th>Số người đã đăng ký</th>-->
+                                <th>Số người đã đăng ký</th>
                                 <th>Bảng giá(VND)/Nhóm</th>
                                 <th>Tìm hiểu thêm</th>
                             </tr>
@@ -72,9 +74,9 @@
                                 <tr>
                                     <td>${L.id}</td>
                                     <td>${L.groupName}</td>
-                                    <td>${L.from_date}</td>
-<!--                                    <td></td>-->
+                                    <td>${L.from_date}</td>                                     
                                     <td>${L.to_date}</td>
+                                    <td>${L.quantity}</td>
                                     <td>${L.price}</td>
                                     <td><a href="detail?id=${L.id}" type="submit" style="text-decoration: none; box-shadow: 0 3px black; ">Thông tin chi tiết</a></td>
                                 </tr>

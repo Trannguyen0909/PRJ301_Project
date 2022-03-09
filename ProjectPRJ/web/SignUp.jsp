@@ -20,6 +20,8 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
               type="text/css" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link
             href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
             rel="stylesheet" type="text/css" />
@@ -59,13 +61,13 @@
                 </div>
             </div>
         </header>
-        <section class="signin-page account">
+        <section class="signin-page account " >
             <div class="container">
-                <div class="row">
+                <div class="row "style="margin-top: 150px; margin-bottom: 130px;" >
                     <div class="col-md-6 mx-auto">
                         <div class="block text-center">
                             <h2 class="text-center">Tạo tài khoản của bạn</h2>
-                            <form class="text-left clearfix mt-30" action="SignUp" method="POST">
+                            <form class="text-left clearfix mt-30" action="SignUp" method="POST" >
                               
                                <div class="${classAlert}">
                                     <strong>${strongAlert}</strong> ${alert}

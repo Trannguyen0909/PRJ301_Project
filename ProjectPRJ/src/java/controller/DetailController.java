@@ -39,11 +39,15 @@ public class DetailController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         int id = Integer.parseInt(request.getParameter("id"));
         List<Group> groupByName = new GroupDAO().getGroupByIdGroup(id);
-        List<MemberDetail> listMember = new DetailDAO().getMemberById(id);        
-        
+        List<MemberDetail> listMember = new DetailDAO().getMemberById(id); 
+        List<Group>listGroupById = new GroupDAO().getGroupById();        
+//        List<Group>listGroups = new GroupDAO().getAllGroups();
+        HttpSession session = request.getSession();
+        session.setAttribute("listGroupById", listGroupById);
+        session.setAttribute("id", id);
         request.setAttribute("listMember", listMember);
         request.setAttribute("groupByName", groupByName);
-       
+        
        
         request.getRequestDispatcher("detailmember.jsp").forward(request, response);
     }

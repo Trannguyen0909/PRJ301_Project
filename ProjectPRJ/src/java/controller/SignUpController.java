@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Account;
 
 /**
@@ -72,12 +73,13 @@ public class SignUpController extends HttpServlet {
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         String phone = request.getParameter("Phone");
-        
+        HttpSession session = request.getSession();
         
         if (!password.equals(re_password)) { //neu repassword khac pass word
-            request.setAttribute("classAlert", "alert alert-danger");
-            request.setAttribute("strongAlert", "Cảnh báo");
-            request.setAttribute("alert", "Mật khẩu không trùng khớp! Vui lòng nhập lại.");              
+            
+            session.setAttribute("classAlert", "alert alert-danger");
+            session.setAttribute("strongAlert", "Cảnh báo");
+            session.setAttribute("alert", "Mật khẩu không trùng khớp! Vui lòng nhập lại.");              
             response.sendRedirect("SignUp.jsp");
         } else {
             AccountDAO account = new AccountDAO();
@@ -86,9 +88,9 @@ public class SignUpController extends HttpServlet {
                 account.signup(username, password, username, password, username, password, true);
                 response.sendRedirect("login.jsp");
             } else {
-                request.setAttribute("classAlert", "alert alert-danger");
-                request.setAttribute("strongAlert", "Cảnh báo");
-                request.setAttribute("alert", "Tài khoản của bạn đã có người sử dụng vui lòng nhập tài khoản khác!");
+                session.setAttribute("classAlert", "alert alert-danger");
+                session.setAttribute("strongAlert", "Cảnh báo");
+                session.setAttribute("alert", "Tài khoản của bạn đã có người sử dụng vui lòng nhập tài khoản khác!");
                 response.sendRedirect("SignUp.jsp");
             }
         }

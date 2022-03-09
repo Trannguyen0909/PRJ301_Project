@@ -24,7 +24,7 @@ public class Group {
     private String groupName;
     private String from_date;
     private String to_date;
-    private String quantity;
+    private int quantity;
     private int price;
     
 }

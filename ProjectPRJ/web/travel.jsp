@@ -20,6 +20,8 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
               type="text/css" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link
             href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
             rel="stylesheet" type="text/css" />
@@ -27,7 +29,7 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
-         <%@include file ="components/navBarComponent.jsp" %>        <!-- Page Header-->
+        <%@include file ="components/navBarComponent.jsp" %>        <!-- Page Header-->
         <header class="masthead"
                 style=" background-image: url('images/hinh-nen-voi-nhung-gam-mau-cua-mu-cang-chai-cua-viet-nam.jpg')">
             <div class="container position-relative px-4 px-lg-5">
@@ -52,14 +54,14 @@
                     </ul> </div>
                 <div class="col-md-9 ">
                     <h3>Lịch đi và cập nhật địa điểm du lịch Yên Bái </h3>
-                    <table class="table table-bordered" style="font-size: 17px">
+                    <table class="table table-bordered" style="font-size: 16px">
                         <thead>
                             <tr>
                                 <th>ID </th>
                                 <th>Điểm Đến</th>
                                 <th>Ngày Đi</th>
                                 <th>Ngày Về</th>
-                                <!--                                <th>Số người đã đăng ký</th>-->
+                                <th>Số người đã đăng ký</th>
                                 <th>Bảng giá(VND)/Nhóm</th>
                                 <th>Tìm hiểu thêm</th>
                             </tr>
@@ -71,8 +73,8 @@
                                     <td>${L.id}</td>
                                     <td>${L.groupName}</td>
                                     <td>${L.from_date}</td>
-                                    <!--                                    <td></td>-->
                                     <td>${L.to_date}</td>
+                                    <td>${L.quantity}</td>
                                     <td>${L.price}</td>
                                     <td><a href="detail?id=${L.id}" type="submit" style="text-decoration: none; box-shadow: 0 3px black; ">Thông tin chi tiết</a></td>
                                 </tr>
@@ -86,10 +88,10 @@
 
                         <ul class="pagination pagination-sm">
                             <c:forEach begin="1" end="${totalPage}" var="i">    
-                                
+
                                 <li class="page-item ${i==page?"active":""}"><a class="page-link" href="travel?page=${i}">${i}</a></li>
-                               
-                                </c:forEach> 
+
+                            </c:forEach> 
                         </ul>
                     </nav>
                 </div>

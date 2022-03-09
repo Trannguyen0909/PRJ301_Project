@@ -14,7 +14,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="description" content="Bingo One page parallax responsive HTML Template ">
-  
+  <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
   <meta name="author" content="Themefisher.com">
 
   <title>Bit-Bank</title>

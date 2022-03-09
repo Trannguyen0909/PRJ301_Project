@@ -34,12 +34,12 @@ public class DetailDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                MemberDetail member = MemberDetail.builder()                      
+                MemberDetail member = MemberDetail.builder()
                         .groupId(rs.getInt(1))
                         .memberId(rs.getInt(2))
                         .memberName(rs.getString(3))
                         .gmail(rs.getString(4))
-                        .phone(rs.getString(5))                      
+                        .phone(rs.getString(5))
                         .price(rs.getInt(6))
                         .build();
                 listMember.add(member);
@@ -50,8 +50,7 @@ public class DetailDAO {
         return listMember;
     }
 
-    
-    public int countMember(int id){     
+    public int countMember(int id) {
         try {
             String sql = "select COUNT(*) as numberMember from dbo.detail group by id having id =?";
             Connection conn = new DBContext().getConnection();
@@ -59,31 +58,31 @@ public class DetailDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-               return rs.getInt(1);
+                return rs.getInt(1);
             }
         } catch (Exception ex) {
             Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
-}
-    
+    }
 
-    public List<MemberDetail> search(String keyword) {
-       List<MemberDetail> list = new ArrayList<>();
+    public List<MemberDetail> search(String keyword, int groupId) {
+        List<MemberDetail> list = new ArrayList<>();
         try {
-            String sql = "select * from Dbo.detail where Membername like?";
+            String sql = "select * from detail where Membername like ? and groupId = ? ";
             Connection conn = new DBContext().getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);         
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + keyword + "%");
+            ps.setInt(2, groupId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                MemberDetail memberDetail = MemberDetail.builder()  
+                MemberDetail memberDetail = MemberDetail.builder()
                         .id(rs.getInt(1))
                         .groupId(rs.getInt(2))
                         .memberId(rs.getInt(3))
                         .memberName(rs.getString(4))
                         .gmail(rs.getString(5))
-                        .phone(rs.getString(6))                       
+                        .phone(rs.getString(6))
                         .price(rs.getInt(7))
                         .build();
                 list.add(memberDetail);

@@ -39,9 +39,10 @@ public class SearchController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
            
            String keyword = request.getParameter("keyword");
-          
+           int groupId = Integer.parseInt(request.getParameter("memberId"));
            
-           List<MemberDetail> listMember = new DetailDAO().search(keyword);
+           List<MemberDetail> listMember = new DetailDAO().search(keyword,groupId);
+          
            request.setAttribute("listMember", listMember);
            request.getRequestDispatcher("detailmember.jsp").forward(request, response);
         }

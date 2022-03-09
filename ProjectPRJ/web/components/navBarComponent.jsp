@@ -26,16 +26,24 @@
                     <c:when test="${sessionScope.account==null}">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="login.jsp">Đăng nhập</a></li>
                         </c:when>
-                        <c:otherwise>
-                        <div class="dropdown">
-                           
-                            <button type="button" class="btn dropdown-toggle text-light admin" data-bs-toggle="dropdown" >
-                                ${sessionScope.account.displayName}
-                            </button>
+                        <c:otherwise>                      
+                        <div  class="navbar-nav ms-auto py-4 py-lg-0 account-div">
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-light"  href="#">${sessionScope.account.displayName}
+                                    <i class="bi bi-caret-down-fill me-1"></i></a></li>
+                            <table class = "account-table" >
+                                <tr>
+                                    <td class="navbar-nav">                                 
+                                <li class="nav-item"><a class="nav-link px-lg-3  text-light"  href="#" >Thông tin</a></li>
+                                </td>
+                                <td class="navbar-nav">                                 
+                                <li class="nav-item"><a class="nav-link px-lg-3  text-light"  href="logout" >Đăng xuất</a></li>
+                                </td>
 
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="dropdown-item" href="logout">Đăng xuất</a></li>                               
-                            </ul>
+                                </tr>
+
+                            </table>
+
+
                         </div>
 
                     </c:otherwise>
@@ -44,3 +52,19 @@
         </div>
     </div>
 </nav>
+<style>
+    .account-div{
+        position: relative;       
+    }
+    .account-table{
+        display: none;
+        position: absolute;
+        top: 45px;
+        width: 150px;
+
+    }
+    .account-div:hover .account-table{
+        display: block;
+
+    }
+</style>
