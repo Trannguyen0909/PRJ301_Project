@@ -69,7 +69,7 @@
                     </form>
 
 
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" style="font-size: 14px;">
                         <thead>
                             <tr>
                                 <th>ID </th>
@@ -77,10 +77,12 @@
                                 <th>Gmail</th>
                                 <th>Phone</th>
                                 <th>Bảng giá(VND)/1 người</th>
+                                <th>Update/Delete</th>
                             </tr>
                         </thead>
 
                         <c:forEach items="${listMember}" var = "M" >
+
                             <tbody>
                                 <tr> 
                                     <td>${M.memberId}</td>
@@ -88,12 +90,15 @@
                                     <td>${M.gmail}</td>
                                     <td>${M.phone}</td>                                   
                                     <td>${M.price}</td>
+                                    <td><a  style="padding: 5px; border-radius: 5px;" class="btn btn-outline-primary" href="#"> update <i class="bi bi-arrow-up-circle-fill"></i> </a>
+                                        <a style="padding: 5px; border-radius: 5px;" class="btn btn-outline-danger" href="deleteMember?memberId=${M.memberId}">delete <i class="bi bi-trash"></i></a> 
+                                    </td>
                                 </tr>
                             </tbody>
+                        </c:forEach>
 
-                            </c:forEach>
-                        </table>                 
-                    <a href="#" type="button" style="margin-bottom: 10px" class="btn btn-success">Đăng ký chuyến đi</a>
+                    </table>                 
+                    <a href="addMember?id=${sessionScope.id}" type="button" style="margin-bottom: 10px" class="btn btn-success">Đăng ký chuyến đi</a>
                 </div>
             </div>
 

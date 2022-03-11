@@ -8,6 +8,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,9 +33,22 @@ public class LogoutController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        HttpSession session = request.getSession();
-        session.removeAttribute("account");
-        response.sendRedirect("Home");
+        request.getSession().removeAttribute("account");
+            //Xóa cookie
+            Cookie[] cookies = request.getCookies();
+            String username = null;
+            String password = null;
+            for (Cookie cooky : cookies) {
+                if (cooky.getName().equals("username")) {
+                    cooky.setMaxAge(0);
+                    response.addCookie(cooky);
+                }
+                if (cooky.getName().equals("password")) {
+                    cooky.setMaxAge(0);
+                    response.addCookie(cooky);
+                }
+            }
+            response.sendRedirect("login");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

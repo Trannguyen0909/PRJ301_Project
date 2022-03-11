@@ -67,7 +67,7 @@
                         <div class="block mt-3">
                             <h2 style="font-size: 28px" class="text-center mb-2">Đăng nhập để tham gia cùng chúng tôi!</h2>
 
-                            <form  class="text-left clearfix mt-50" action="login" >
+                            <form  class="text-left clearfix mt-50" action="login" method="POST" >
                                 <div class="${classAlert}">
                                     <strong>${strongAlert}</strong> ${alert}
                                 </div>
@@ -76,6 +76,10 @@
                                 </div>
                                 <div class="form-group my-2" >
                                     <input type="password" class="form-control" placeholder="Password" name="password">
+                                </div>
+                                <div  class="mb-3 form-check">
+                                    <input style="border-radius: 40px; " type="checkbox" class="form-check-input" id="exampleCheck1" name="remember">
+                                    <label style="font-size: 18px;" class="form-check-label" for="exampleCheck1">Remember me</label>
                                 </div>
                                 <button type="submit" class="btn btn-main" >Đăng nhập</button>
 

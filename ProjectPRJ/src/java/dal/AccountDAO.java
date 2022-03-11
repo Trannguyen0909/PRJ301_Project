@@ -29,7 +29,7 @@ public class AccountDAO {
                     + "      ,[address]\n"
                     + "      ,[email]\n"
                     + "      ,[phone]\n"
-                    + "      ,[isAdmin]\n"
+                    + "      ,[role]\n"
                     + "  FROM [Project].[dbo].[Account]\n"
                     + "  where username = ? and password =?";
             Connection conn = new DBContext().getConnection();
@@ -46,7 +46,7 @@ public class AccountDAO {
                         .address(rs.getString(5))
                         .email(rs.getString(6))
                         .phone(rs.getString(7))
-                        .isAdmin(rs.getBoolean(8))
+                        .role(rs.getString(8))
                         .build();
             }
         } catch (Exception ex) {
@@ -61,7 +61,6 @@ public class AccountDAO {
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, username);
-
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 return Account.builder()
@@ -80,18 +79,27 @@ public class AccountDAO {
         return null;
     }
 
-    public void signup(String username, String password,String displayName,String address,String email,String phone,boolean isAdmin) {
+    public void signup(String username, String password, String displayName, String address, String email, String phone, String role) {
         try {
-            String sql = "INSERT INTO [Project].[dbo].[Account]([username],[password],[displayName],[address],[email],[phone],[isAdmin])\n"
-                    + "VALUES(?,?, ?,?,?,?,0) ";
+            String sql = "INSERT INTO [Project].[dbo].[Account]\n"
+                    + "           ([username]\n"
+                    + "           ,[password]\n"
+                    + "           ,[displayName]\n"
+                    + "           ,[address]\n"
+                    + "           ,[email]\n"
+                    + "           ,[phone]\n"
+                    + "           ,[role])\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?,?,?,?,?)";
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            ps.setString(2, password);
+            ps.setString(1,username);
+            ps.setString(2,password);
             ps.setString(3,displayName);
             ps.setString(4,address);
-            ps.setString(5, email);
-            ps.setString(6, phone);           
+            ps.setString(5,email);
+            ps.setString(6,phone);
+            ps.setString(7,role);
             ps.executeUpdate();
 
         } catch (Exception ex) {

@@ -36,6 +36,22 @@
         <servlet-name>SignUpController</servlet-name>
         <servlet-class>controller.SignUpController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddMemberController</servlet-name>
+        <servlet-class>controller.AddMemberController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteMemberController</servlet-name>
+        <servlet-class>controller.DeleteMemberController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>controller.AdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateController</servlet-name>
+        <servlet-class>controller.UpdateMemberController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -71,6 +87,22 @@
     <servlet-mapping>
         <servlet-name>SignUpController</servlet-name>
         <url-pattern>/SignUp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddMemberController</servlet-name>
+        <url-pattern>/addMember</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteMemberController</servlet-name>
+        <url-pattern>/deleteMember</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/admin/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateController</servlet-name>
+        <url-pattern>/updateMember</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

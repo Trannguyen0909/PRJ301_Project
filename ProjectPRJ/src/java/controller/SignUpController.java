@@ -72,7 +72,8 @@ public class SignUpController extends HttpServlet {
         String displayName = request.getParameter("displayName");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
-        String phone = request.getParameter("Phone");
+        String phone = request.getParameter("phone");
+        String admin = request.getParameter("role");
         HttpSession session = request.getSession();
         
         if (!password.equals(re_password)) { //neu repassword khac pass word
@@ -85,8 +86,8 @@ public class SignUpController extends HttpServlet {
             AccountDAO account = new AccountDAO();
             Account a = account.checkAccountExist(username);
             if (a == null) { //chua co =>sign up
-                account.signup(username, password, username, password, username, password, true);
-                response.sendRedirect("login.jsp");
+                account.signup(username, password, displayName,address,email, phone,admin);
+               request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 session.setAttribute("classAlert", "alert alert-danger");
                 session.setAttribute("strongAlert", "Cảnh báo");

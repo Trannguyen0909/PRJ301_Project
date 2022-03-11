@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Account;
 import model.Group;
 import model.MemberDetail;
 
@@ -91,6 +92,41 @@ public class DetailDAO {
             Logger.getLogger(DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public void addMember(int id, Account account) {
+        try {
+            String sql = "INSERT INTO [Project].[dbo].[detail]\n"
+                    + "           ([id]          \n"
+                    + "           ,[Membername]\n"
+                    + "           ,[gmail]\n"
+                    + "           ,[phone] )       \n"
+                    + "     VALUES\n"
+                    + "           (?,?,?,?)";
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.setString(2, account.getDisplayName());
+            ps.setString(3, account.getEmail());
+            ps.setString(4, account.getPhone());
+            ps.executeUpdate();
+
+        } catch (Exception ex) {
+            Logger.getLogger(DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void deleteMember(int memberId, Account account) {
+        try {
+            String sql = "delete from detail where memberid =? ";
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);          
+            ps.setInt(1, memberId);        
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

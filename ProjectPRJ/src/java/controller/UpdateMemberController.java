@@ -5,24 +5,18 @@
  */
 package controller;
 
-import dal.DetailDAO;
-import dal.GroupDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Group;
-import model.MemberDetail;
 
 /**
  *
  * @author FPTSHOP-ACER
  */
-public class DetailController extends HttpServlet {
+public class UpdateMemberController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,22 +29,19 @@ public class DetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        int id = Integer.parseInt(request.getParameter("id"));
-        List<Group> groupByName = new GroupDAO().getGroupByIdGroup(id);
-        List<MemberDetail> listMember = new DetailDAO().getMemberById(id); 
-        List<Group>listGroupById = new GroupDAO().getGroupById();        
-//        List<Group>listGroups = new GroupDAO().getAllGroups();
-        HttpSession session = request.getSession();
-        session.setAttribute("listGroupById", listGroupById);
-        session.setAttribute("id", id);
-        session.setAttribute("listMember", listMember);
-        request.setAttribute("listMember", listMember);
-        request.setAttribute("groupByName", groupByName);
-        
-       
-        request.getRequestDispatcher("detailmember.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdateController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdateController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -5,8 +5,7 @@
  */
 package controller;
 
-
-import dal.DetailDAO;
+import dal.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
@@ -16,13 +15,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Account;
 import model.MemberDetail;
+import dal.DetailDAO;
 
 /**
  *
  * @author FPTSHOP-ACER
  */
-public class CountMemberController extends HttpServlet {
+public class AddMemberController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,19 +39,19 @@ public class CountMemberController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           int id = Integer.parseInt(request.getParameter("id"));
-           HttpSession session = request.getSession();
-           Map<Integer,MemberDetail> countMember = (Map<Integer,MemberDetail>) session.getAttribute("MemberDetail");
-           if(countMember==null){ //neu detailMember chua co tren session => tao ra detailMember de add vao 
-               countMember = new LinkedHashMap<>();
-               
-           }
-           if(countMember.containsKey(id)){
-               int quantity = new DetailDAO().countMember(id);
-               session.setAttribute("countMember", countMember);     
-               request.setAttribute("quantity", quantity);
-           }
-            response.sendRedirect("travel.jsp");
+            int id = Integer.parseInt(request.getParameter("id"));
+            HttpSession session = request.getSession();
+
+            Account account = (Account) session.getAttribute("account");
+             
+            int temp =0;
+            if(temp<1){
+                new DetailDAO().addMember(id, account);
+                temp++;
+            }
+            
+            response.sendRedirect("detail?id="+id);
+            
         }
     }
 

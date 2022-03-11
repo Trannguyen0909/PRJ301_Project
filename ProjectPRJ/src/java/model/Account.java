@@ -18,6 +18,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Account {
+    public static final String ADMIN = "ADMIN";
+    public static final String USER = "USER";
     private int id;
     private String username;
     private String password;
@@ -25,5 +27,5 @@ public class Account {
     private String address;
     private String email;
     private String phone;
-    private boolean isAdmin;
+    private String role;
 }

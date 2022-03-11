@@ -5,8 +5,8 @@
  */
 package controller;
 
+import dal.AccountDAO;
 import dal.DetailDAO;
-import dal.GroupDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -15,14 +15,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Group;
+import model.Account;
 import model.MemberDetail;
 
 /**
  *
  * @author FPTSHOP-ACER
  */
-public class DetailController extends HttpServlet {
+public class DeleteMemberController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,22 +35,7 @@ public class DetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        int id = Integer.parseInt(request.getParameter("id"));
-        List<Group> groupByName = new GroupDAO().getGroupByIdGroup(id);
-        List<MemberDetail> listMember = new DetailDAO().getMemberById(id); 
-        List<Group>listGroupById = new GroupDAO().getGroupById();        
-//        List<Group>listGroups = new GroupDAO().getAllGroups();
-        HttpSession session = request.getSession();
-        session.setAttribute("listGroupById", listGroupById);
-        session.setAttribute("id", id);
-        session.setAttribute("listMember", listMember);
-        request.setAttribute("listMember", listMember);
-        request.setAttribute("groupByName", groupByName);
-        
-       
-        request.getRequestDispatcher("detailmember.jsp").forward(request, response);
+    
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,7 +50,17 @@ public class DetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
+        int id = (int) session.getAttribute("id");
+        int memberId = Integer.parseInt(request.getParameter("memberId"));
+        
+        Account account = (Account) session.getAttribute("account");       
+        new DetailDAO().deleteMember(memberId, account);
+        
+        response.sendRedirect("detail?id=" +id);
+        
     }
 
     /**
