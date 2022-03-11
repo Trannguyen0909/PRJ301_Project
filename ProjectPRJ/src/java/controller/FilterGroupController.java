@@ -43,7 +43,7 @@ public class FilterGroupController extends HttpServlet {
             session.setAttribute("listGroupById", listGroupById);
             List<Group> groupsByGroupId = new GroupDAO().getGroupsByGroupId(groupId);
             request.setAttribute("groupsByGroupId", groupsByGroupId);
-
+            session.setAttribute("groupsByGroupId", groupsByGroupId);
             request.getRequestDispatcher("travelDetail.jsp").forward(request, response);
         }
     }

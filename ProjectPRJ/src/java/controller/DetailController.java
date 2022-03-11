@@ -41,7 +41,7 @@ public class DetailController extends HttpServlet {
         List<Group> groupByName = new GroupDAO().getGroupByIdGroup(id);
         List<MemberDetail> listMember = new DetailDAO().getMemberById(id); 
         List<Group>listGroupById = new GroupDAO().getGroupById();        
-//        List<Group>listGroups = new GroupDAO().getAllGroups();
+//      List<Group>listGroups = new GroupDAO().getAllGroups();
         HttpSession session = request.getSession();
         session.setAttribute("listGroupById", listGroupById);
         session.setAttribute("id", id);

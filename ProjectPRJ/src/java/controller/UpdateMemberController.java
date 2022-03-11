@@ -5,12 +5,16 @@
  */
 package controller;
 
+import dal.AccountDAO;
+import dal.DetailDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -29,18 +33,22 @@ public class UpdateMemberController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UpdateController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UpdateController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+            HttpSession session = request.getSession();
+            Account account = (Account) session.getAttribute("account");
+            int id = (int) session.getAttribute("id");           
+            String memberName = request.getParameter("username");
+            int memberId = Integer.parseInt(request.getParameter("memberId"));
+            String gmail = request.getParameter("gmail");
+            String phone = request.getParameter("phone");
+            String price = request.getParameter("price");
+            
+            
+            new DetailDAO().UpdateMember(id,memberId, memberName, gmail, phone, price);
+            request.getRequestDispatcher("UpdateMember.jsp").forward(request, response);
         }
     }
 
@@ -56,7 +64,8 @@ public class UpdateMemberController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("UpdateMember.jsp").forward(request, response);
+
     }
 
     /**

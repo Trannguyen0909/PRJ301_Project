@@ -90,8 +90,14 @@
                                     <td>${M.gmail}</td>
                                     <td>${M.phone}</td>                                   
                                     <td>${M.price}</td>
-                                    <td><a  style="padding: 5px; border-radius: 5px;" class="btn btn-outline-primary" href="#"> update <i class="bi bi-arrow-up-circle-fill"></i> </a>
-                                        <a style="padding: 5px; border-radius: 5px;" class="btn btn-outline-danger" href="deleteMember?memberId=${M.memberId}">delete <i class="bi bi-trash"></i></a> 
+                                    <td><a  style="padding: 5px; border-radius: 5px;" class="btn btn-outline-primary" href="updateMember?memberId=${M.memberId}"> update <i class="bi bi-arrow-up-circle-fill"></i> </a>
+                                        <a style="padding: 5px; border-radius: 5px;" class="btn btn-outline-danger" href="deleteMember?memberId=${M.memberId}" onclick="if (confirm('Delete selected item?')) {
+                                               return true;
+                                           } else {
+                                               event.stopPropagation();
+                                               event.preventDefault();
+                                           }
+                                           ;">delete <i class="bi bi-trash"></i></a> 
                                     </td>
                                 </tr>
                             </tbody>
@@ -105,4 +111,12 @@
         </div>
         <%@include file ="components/footerComponent.jsp" %>
     </body>
+    <script>
+        fuction showMess(memberId){
+            var option = confirm('Bạn chắc chắn muốn xóa chứ');
+            if(option ===true){
+                window.location.href='deleteMember?memberId='+memberId;
+            }
+        }
+    </script>
 </html>

@@ -93,13 +93,40 @@ public class AccountDAO {
                     + "           (?,?,?,?,?,?,?)";
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1,username);
-            ps.setString(2,password);
-            ps.setString(3,displayName);
-            ps.setString(4,address);
-            ps.setString(5,email);
-            ps.setString(6,phone);
-            ps.setString(7,role);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.setString(3, displayName);
+            ps.setString(4, address);
+            ps.setString(5, email);
+            ps.setString(6, phone);
+            ps.setString(7, role);
+            ps.executeUpdate();
+
+        } catch (Exception ex) {
+            Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void UpdateAccount(int accountId, String username, String password, String displayName, String address, String email, String phone) {
+        try {
+            String sql = "UPDATE [Project].[dbo].[Account]\n"
+                    + "   SET [username] =?\n"
+                    + "      ,[password] = ?\n"
+                    + "      ,[displayName] = ?\n"
+                    + "      ,[address] = ?\n"
+                    + "      ,[email] = ?\n"
+                    + "      ,[phone] = ?\n"                    
+                    + " WHERE id= ? ";
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.setString(3, displayName);
+            ps.setString(4, address);
+            ps.setString(5, email);
+            ps.setString(6, phone); 
+            ps.setInt(7,accountId);
+            
             ps.executeUpdate();
 
         } catch (Exception ex) {

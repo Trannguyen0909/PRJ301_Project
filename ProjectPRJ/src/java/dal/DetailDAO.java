@@ -121,12 +121,37 @@ public class DetailDAO {
         try {
             String sql = "delete from detail where memberid =? ";
             Connection conn = new DBContext().getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);          
-            ps.setInt(1, memberId);        
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, memberId);
             ps.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void UpdateMember(int id, int memberId, String memberName, String gmail, String phone, String price) {
+        try {
+            String sql = "UPDATE [Project].[dbo].[detail]\n"
+                    + "   SET [id] = ?    \n"
+                    + "      ,[Membername] = ?\n"
+                    + "      ,[gmail] = ?\n"
+                    + "      ,[phone] = ?\n"
+                    + "      ,[price] = ?\n"
+                    + " WHERE memberid= ?";
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.setInt(2, memberId);
+            ps.setString(3, memberName);
+            ps.setString(4, gmail);
+            ps.setString(5, phone);
+            ps.setString(6, price);
+            ps.executeUpdate();
+
+        } catch (Exception ex) {
+            Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

@@ -28,7 +28,7 @@ import model.Account;
  *
  * @author FPTSHOP-ACER
  */
-@WebFilter(filterName = "AunthenticationFilter", urlPatterns = {"/addMember","/deleteMember"})
+@WebFilter(filterName = "AunthenticationFilter", urlPatterns = {"/addMember","/deleteMember","/updateMember"})
 public class AunthenticationFilter implements Filter {
 
     @Override
