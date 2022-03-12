@@ -24,7 +24,7 @@
 
                 <c:choose>                       
                     <c:when test="${sessionScope.account==null}">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="login.jsp">Đăng nhập</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="login">Đăng nhập</a></li>
                         </c:when>
                         <c:otherwise>                      
                         <div  class="navbar-nav ms-auto py-4 py-lg-0 account-div">

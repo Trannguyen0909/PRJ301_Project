@@ -26,7 +26,7 @@ public class GroupDAO {
         List<Group> list = new ArrayList<>();
         try {
             String sql = "SELECT [id]\n"
-                    + "      ,[groupid]\n"
+                    + "      ,[groupValue]\n"
                     + "      ,[groupname]\n"
                     + "      ,[from_date]\n"
                     + "      ,[to_date]\n"
@@ -39,7 +39,7 @@ public class GroupDAO {
             while (rs.next()) {
                 Group group = Group.builder()
                         .id(rs.getInt(1))
-                        .groupId(rs.getInt(2))
+                        .groupValue(rs.getInt(2))
                         .groupName(rs.getString(3))
                         .from_date(rs.getString(4))
                         .to_date(rs.getString(5))
@@ -54,17 +54,22 @@ public class GroupDAO {
         return list;
     }
 
-    public List<Group> getGroupById() {
+    //GetGroupByGroupValue
+    public List<Group> getAllGroupByGroupValue() {
         List<Group> list = new ArrayList<>();
         try {
-            String sql = "select groupid,groupName from dbo.[Group] group by groupid,groupName  ";
+            String sql = "select groupValue,groupName from dbo.[Group] group by groupValue,groupName ";
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Group group = Group.builder()
-                        .groupId(rs.getInt(1))
+                        .groupValue(rs.getInt(1))                    
                         .groupName(rs.getString(2))
+                        .from_date(rs.getString(3))
+                        .to_date(rs.getString(4))
+                        .quantity(countMemberId(rs.getInt(5)))
+                        .price(rs.getInt(6))
                         .build();
                 list.add(group);
             }
@@ -74,18 +79,18 @@ public class GroupDAO {
         return list;
     }
 
-    public List<Group> getGroupsByGroupId(int groupId) {
+     public List<Group> getGroupsByGroupValue(int groupValue) {
         List<Group> list = new ArrayList<>();
         try {
-            String sql = "select * from dbo.[Group] where groupid =?";
+            String sql = "select * from dbo.[Group] where groupValue = ?";
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, groupId);
+            ps.setInt(1, groupValue);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Group group = Group.builder()
                         .id(rs.getInt(1))
-                        .groupId(rs.getInt(2))
+                        .groupValue(rs.getInt(2))
                         .groupName(rs.getString(3))
                         .from_date(rs.getString(4))
                         .to_date(rs.getString(5))
@@ -99,7 +104,8 @@ public class GroupDAO {
         }
         return list;
     }
-     public int countMemberId(int id) {
+     
+    public int countMemberId(int id) {
         try {
             String sql = "select COUNT(*) from detail where id =?";
             Connection conn = new DBContext().getConnection();
@@ -107,7 +113,7 @@ public class GroupDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-               return rs.getInt(1);
+                return rs.getInt(1);
             }
         } catch (Exception ex) {
             Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -125,7 +131,7 @@ public class GroupDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Group group = Group.builder()
-                        .groupId(rs.getInt(1))
+                        .groupValue(rs.getInt(1))
                         .groupName(rs.getString(2))
                         .id(rs.getInt(3))
                         .build();
@@ -140,20 +146,23 @@ public class GroupDAO {
     public List<Group> getGroupWithPagging(int page, int PAGE_SIZE) {
         List<Group> list = new ArrayList<>();
         try {
-            String sql = "with t as (select ROW_NUMBER() over (order by g.id asc) as r ,* from dbo.[Group] as g )\n"
-                    + "select* from t where r between ?*?-(?-1) and ?*?";
+            String sql = "with t as (select ROW_NUMBER() over (order by g.id asc) as r ,* from dbo.[Group] as g "
+                    + " where groupValue = ?)\n"
+                    + "select* from t where r between ?*?-(?-1) and ?*?";   
+            
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, page);
-            ps.setInt(2, PAGE_SIZE);
+            ps.setInt(1, groupValue);
+            ps.setInt(2, page);
             ps.setInt(3, PAGE_SIZE);
-            ps.setInt(4, page);
-            ps.setInt(5, PAGE_SIZE);
+            ps.setInt(4, PAGE_SIZE);
+            ps.setInt(5, page);
+            ps.setInt(6, PAGE_SIZE);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Group group = Group.builder()
                         .id(rs.getInt(2))
-                        .groupId(rs.getInt(3))
+                        .groupValue(rs.getInt(3))
                         .groupName(rs.getString(4))
                         .from_date(rs.getString(5))
                         .to_date(rs.getString(6))
@@ -169,15 +178,15 @@ public class GroupDAO {
     }
 
     public int getTotalGroup() {
-       
+
         try {
             String sql = "select count(id) from dbo.[group] ";
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                
+
                 return rs.getInt(1);
             }
         } catch (Exception ex) {

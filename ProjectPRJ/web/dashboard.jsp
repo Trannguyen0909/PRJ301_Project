@@ -12,6 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>DashBoard</h1>
+        <c:if test="${sessionScope.account == null}">
+            <c:redirect url="login.jsp"></c:redirect>
+        </c:if>
+        <c:if test="${sessionScope.account.role != 'ADMIN'}">
+            <c:redirect url="home.jsp"></c:redirect>
+        </c:if>
+        <h1>DashBoard For Admin</h1>
     </body>
 </html>

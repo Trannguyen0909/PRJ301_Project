@@ -39,19 +39,39 @@ public class AddMemberController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            HttpSession session = request.getSession();
+            String url = "";
+            String msg = "";
+            try {
 
-            Account account = (Account) session.getAttribute("account");
-             
-            int temp =0;
-            if(temp<1){
-                new DetailDAO().addMember(id, account);
-                temp++;
+                HttpSession session = request.getSession();
+                DetailDAO detailDAO = new DetailDAO();
+
+                int groupId = Integer.parseInt(request.getParameter("groupId"));
+
+                Account account = (Account) session.getAttribute("account");
+
+                if (account == null) {
+                    url = "login.jsp";
+                    msg = "You Must LOGIN!!!";
+                } else {
+
+                    if (detailDAO.checkMemberExistInGroup(account.getId(), groupId)) {
+                        url = "detail?groupId=" + groupId;
+                        msg = "YOU HAVE BEEN REGIS TO THIS GROUP";
+                    } else {
+                        detailDAO.addMember(account.getId(), groupId);
+                        url = "detail?groupId=" + groupId;
+                        msg = "REGIS SUCCESS!";
+                    }
+                }
+
+                request.setAttribute("ADDMEMBER_MSG", msg);
+
+            } catch (Exception e) {
+                log("ERROR AT ADD MEMBER CONTROLLER :" + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
             }
-            
-            response.sendRedirect("detail?id="+id);
-            
         }
     }
 

@@ -53,13 +53,41 @@ public class DeleteMemberController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-        int id = (int) session.getAttribute("id");
-        int memberId = Integer.parseInt(request.getParameter("memberId"));
-        
-        Account account = (Account) session.getAttribute("account");       
-        new DetailDAO().deleteMember(memberId, account);
-        
-        response.sendRedirect("detail?id=" +id);
+        String url = "";
+        String msg = "";
+        try {
+
+            HttpSession session = request.getSession();
+            DetailDAO detailDAO = new DetailDAO();
+
+            int detailsId = Integer.parseInt(request.getParameter("detailsId"));
+
+            int groupId = Integer.parseInt(request.getParameter("groupId"));
+            Account account = (Account) session.getAttribute("account");
+
+            if (account == null) {
+                url = "login.jsp";
+                msg = "You Must LOGIN!!!";
+            } else {
+
+                if (detailDAO.checkMemberExistInGroup(account.getId(), groupId)) {
+                    //Delete
+                    detailDAO.deleteMemberWithDetailId(detailsId);
+                    msg = "DELETE SUCCESS!";
+                    url = "detail?groupId=" + groupId;
+                } else {
+                    msg = "YOU NOT REGIS IN THIS GROUP";
+                    url = "detail?groupId=" + groupId;
+                }
+            }
+
+            request.setAttribute("DELETEMEMBER_MSG", msg);
+
+        } catch (Exception e) {
+            log("ERROR AT ADD MEMBER CONTROLLER :" + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
         
     }
 

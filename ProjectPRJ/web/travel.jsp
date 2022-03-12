@@ -47,10 +47,9 @@
             <div class="row">
                 <div class="col-md-3 mb-5"><ul class="list-group">
                         <h3>Du lịch Yên Bái</h3>
-                        <c:forEach items="${sessionScope.listGroupById}" var = "G">
-
-                            <li  class="list-group-item"><a href="filter-group?groupId=${G.groupId}">${G.groupName}</a></li>
-                            </c:forEach>                      
+                        <c:forEach items="${sessionScope.listGroupByValue}" var = "g">
+                            <li  class="list-group-item"><a href="filter-group?groupValue=${g.groupValue}">${g.groupName}</a></li>
+                            </c:forEach>                       
                     </ul> </div>
                 <div class="col-md-9 ">
                     <h3>Lịch đi và cập nhật địa điểm du lịch Yên Bái </h3>

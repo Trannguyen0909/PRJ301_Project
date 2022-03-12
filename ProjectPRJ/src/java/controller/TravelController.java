@@ -39,28 +39,32 @@ public class TravelController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-          int page=1;
-        final int PAGE_SIZE =10;
+        HttpSession session = request.getSession();
+
+        int page = 1;
+        final int PAGE_SIZE = 10;
         String pageStr = request.getParameter("page");
-        if(pageStr!=null){
+        if (pageStr != null) {
             page = Integer.parseInt(pageStr);
-            
         }
         int totalGroup = new GroupDAO().getTotalGroup();
-        int totalPage = totalGroup/PAGE_SIZE;
-        if(totalGroup%PAGE_SIZE!=0){
-            totalPage+=1;
+        int totalPage = totalGroup / PAGE_SIZE;
+        if (totalGroup % PAGE_SIZE != 0) {
+            totalPage += 1;
         }
-        List<Group> listGroups = new GroupDAO().getGroupWithPagging(page,PAGE_SIZE);
-        List<Group>listGroupById = new GroupDAO().getGroupById();        
+        List<Group> listGroupByGroupValue = new GroupDAO().getAllGroupByGroupValue();
+
+        List<Group> listGroupDetails = new GroupDAO().getGroupWithPagging(page, PAGE_SIZE);
 //        List<Group>listGroups = new GroupDAO().getAllGroups();
-        HttpSession session = request.getSession();
-        session.setAttribute("listGroupById", listGroupById);
-        request.setAttribute("listGroups",listGroups);
+
+        //session for GroupValue
+        session.setAttribute("listGroupByValue", listGroupByGroupValue);
+
+        //Request for GroupDetails
+        request.setAttribute("listGroupDetails", listGroupDetails);
+
+        //Paging value
         request.setAttribute("page", page);
-        request.setAttribute("totalPage", totalPage);
-        DetailDAO detaildao = new DetailDAO();
-       
 //        int count = detaildao.count(id);
         
         request.getRequestDispatcher("travel.jsp").forward(request, response);

@@ -51,13 +51,14 @@
 
                 <div class="col-md-3 mb-5"><ul class="list-group">
                         <h3>Du lịch Yên Bái</h3>
-                        <c:forEach items="${sessionScope.listGroupById}" var = "G">
-                            <a href="filter-group?groupId=${G.groupId}" class="list-group-item">${G.groupName}</a>
-                        </c:forEach>                      
+                        <c:forEach items="${sessionScope.listGroupByValue}" var = "g">
+                            <li  class="list-group-item"><a href="filter-group?groupValue=${g.groupValue}">${g.groupName}</a></li>
+                            </c:forEach>                      
                     </ul></div>
                 <div class="col-md-9 ">
                     <h3>Thông tin chi tiết  </h3>
                     <form action = "search"class="d-flex mx-auto">
+                        <input type="hidden" name="groupId" value="${requestScope.groupId}">
                         <input class="form-control me-2"
                                type = "search"
                                placeholder="Search"
@@ -73,7 +74,8 @@
                         <thead>
                             <tr>
                                 <th>ID </th>
-                                <th>Họ và Tên</th>
+                                <th>Group</th>
+                                <th>Họ và Tên</th>                              
                                 <th>Gmail</th>
                                 <th>Phone</th>
                                 <th>Bảng giá(VND)/1 người</th>
@@ -81,7 +83,7 @@
                             </tr>
                         </thead>
 
-                        <c:forEach items="${listMember}" var = "M" >
+                         <c:forEach items="${requestScope.listMember}" var = "M" >
 
                             <tbody>
                                 <tr> 
@@ -92,12 +94,12 @@
                                     <td>${M.price}</td>
                                     <td><a  style="padding: 5px; border-radius: 5px;" class="btn btn-outline-primary" href="updateMember?memberId=${M.memberId}"> update <i class="bi bi-arrow-up-circle-fill"></i> </a>
                                         <a style="padding: 5px; border-radius: 5px;" class="btn btn-outline-danger" href="deleteMember?memberId=${M.memberId}" onclick="if (confirm('Delete selected item?')) {
-                                               return true;
-                                           } else {
-                                               event.stopPropagation();
-                                               event.preventDefault();
-                                           }
-                                           ;">delete <i class="bi bi-trash"></i></a> 
+                                                    return true;
+                                                } else {
+                                                    event.stopPropagation();
+                                                    event.preventDefault();
+                                                }
+                                                ;">delete <i class="bi bi-trash"></i></a> 
                                     </td>
                                 </tr>
                             </tbody>
@@ -114,8 +116,8 @@
     <script>
         fuction showMess(memberId){
             var option = confirm('Bạn chắc chắn muốn xóa chứ');
-            if(option ===true){
-                window.location.href='deleteMember?memberId='+memberId;
+            if (option === true) {
+                window.location.href = 'deleteMember?memberId=' + memberId;
             }
         }
     </script>

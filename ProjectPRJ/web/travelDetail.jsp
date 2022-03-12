@@ -30,7 +30,7 @@
     </head>
     <body>
         <!-- Navigation-->
-         <%@include file ="components/navBarComponent.jsp" %>
+        <%@include file ="components/navBarComponent.jsp" %>
         <!-- Page Header-->
         <header class="masthead"
                 style=" background-image: url('images/hinh-nen-voi-nhung-gam-mau-cua-mu-cang-chai-cua-viet-nam.jpg')">
@@ -44,14 +44,13 @@
                 </div>
             </div>
         </header>
-   
+
         <div class="container mt-3">
             <div class="row">
                 <div class="col-md-3 mb-5"><ul class="list-group">
                         <h3>Du lịch Yên Bái</h3>
                         <c:forEach items="${sessionScope.listGroupById}" var = "G">
-
-                            <li  class="list-group-item"><a href="filter-group?groupId=${G.groupId}">${G.groupName}</a></li>
+                            <li  class="list-group-item"><a href="filter-group?groupValue=${G.groupValue}">${G.groupName}</a></li>
                             </c:forEach>                      
                     </ul> </div>
                 <div class="col-md-9 ">
@@ -69,7 +68,7 @@
                             </tr>
                         </thead>
                         <c:forEach items="${groupsByGroupId}" var = "L" >
-                          
+
                             <tbody>
                                 <tr>
                                     <td>${L.id}</td>
@@ -81,15 +80,15 @@
                                     <td><a href="detail?id=${L.id}" type="submit" style="text-decoration: none; box-shadow: 0 3px black; ">Thông tin chi tiết</a></td>
                                 </tr>
                             </tbody>
-                            
+
                         </c:forEach>
 
                     </table>
-                    
+
                 </div>
             </div>
 
         </div>
-         <%@include file ="components/footerComponent.jsp" %>
+        <%@include file ="components/footerComponent.jsp" %>
     </body>
 </html>

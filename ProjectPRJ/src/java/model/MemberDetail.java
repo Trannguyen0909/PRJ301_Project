@@ -9,6 +9,7 @@ package model;
  *
  * @author FPTSHOP-ACER
  */
+import java.io.Serializable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,12 +19,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MemberDetail {
+public class MemberDetail implements Serializable {
+
     private int id;
-    private int groupId;
-    private int memberId;
+    private int userId;
+    private int groupValue;
     private String memberName;
     private String gmail;
     private String phone;
-    private int price;    
+    private int price;  
 }

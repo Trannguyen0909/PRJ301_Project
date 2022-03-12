@@ -37,18 +37,30 @@ public class UpdateMemberController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            HttpSession session = request.getSession();
-            Account account = (Account) session.getAttribute("account");
-            int id = (int) session.getAttribute("id");           
-            String memberName = request.getParameter("username");
-            int memberId = Integer.parseInt(request.getParameter("memberId"));
-            String gmail = request.getParameter("gmail");
-            String phone = request.getParameter("phone");
-            String price = request.getParameter("price");
-            
-            
-            new DetailDAO().UpdateMember(id,memberId, memberName, gmail, phone, price);
-            request.getRequestDispatcher("UpdateMember.jsp").forward(request, response);
+            String url = "";
+            String msg = "";
+            try {
+                HttpSession session = request.getSession();
+                Account account = (Account) session.getAttribute("account");
+                AccountDAO accountDAO = new AccountDAO();
+                if (account == null) {
+                    url = "login.jsp";
+                } else {
+                    int groupId = Integer.parseInt(request.getParameter("groupId"));
+                    int id = Integer.parseInt(request.getParameter("userId"));
+                    String displayName = request.getParameter("displayName");
+                    String address = request.getParameter("address");
+                    String email = request.getParameter("gmail");
+                    String phone = request.getParameter("phone");
+                    accountDAO.UpdateAccount(id, account.getUsername(), account.getPassword(), displayName, address, email, phone);
+                    url = "detail?groupId=" + groupId;
+                }
+
+            } catch (Exception e) {
+                log("ERROR AT UPDATEMEMBER:" + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
         }
     }
 
