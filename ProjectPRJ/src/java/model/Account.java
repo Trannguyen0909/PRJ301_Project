@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package model;
+import java.io.Serializable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Account {
+public class Account implements Serializable{
+    
     public static final String ADMIN = "ADMIN";
     public static final String USER = "USER";
     private int id;

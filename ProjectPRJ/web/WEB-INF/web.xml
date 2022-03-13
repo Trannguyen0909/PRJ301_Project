@@ -52,6 +52,10 @@
         <servlet-name>UpdateController</servlet-name>
         <servlet-class>controller.UpdateMemberController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdatePageController</servlet-name>
+        <servlet-class>controller.UpdatePageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -98,11 +102,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
-        <url-pattern>/admin/dashboard</url-pattern>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateController</servlet-name>
         <url-pattern>/updateMember</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePageController</servlet-name>
+        <url-pattern>/UpdatePageController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

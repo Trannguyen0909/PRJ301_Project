@@ -37,14 +37,17 @@ public class SearchController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           
-           String keyword = request.getParameter("keyword");
-           int groupId = Integer.parseInt(request.getParameter("memberId"));
-           
-           List<MemberDetail> listMember = new DetailDAO().search(keyword,groupId);
-          
-           request.setAttribute("listMember", listMember);
-           request.getRequestDispatcher("detailmember.jsp").forward(request, response);
+
+            String keyword = request.getParameter("keyword");
+            if (keyword.isEmpty() || keyword == null) {
+                keyword = "";
+            }
+            int groupId = Integer.parseInt(request.getParameter("groupId"));
+
+            List<MemberDetail> listMember = new DetailDAO().searchDetails(keyword, groupId);
+            request.setAttribute("groupId", groupId);
+            request.setAttribute("listMember", listMember);
+            request.getRequestDispatcher("detailmember.jsp").forward(request, response);
         }
     }
 

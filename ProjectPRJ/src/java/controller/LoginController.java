@@ -35,7 +35,7 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        try (PrintWriter out = response.getWriter()) {                         
+        try (PrintWriter out = response.getWriter()) {
         }
     }
 
@@ -53,7 +53,7 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-       //kiểm tra cookie
+        //kiểm tra cookie
         Cookie[] cookies = request.getCookies();
         String username = null;
         String password = null;
@@ -76,10 +76,17 @@ public class LoginController extends HttpServlet {
                 response.sendRedirect("Home");
                 return;
             }
+        } else {
+            HttpSession session = request.getSession();
+            Account account = (Account) session.getAttribute("account");
+            if (account == null) {
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("home.jsp").forward(request, response);
+            }
+
         }
-        request.getRequestDispatcher("login.jsp").forward(request, response);
-       
-        
+
     }
 
     /**
@@ -97,30 +104,43 @@ public class LoginController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        boolean remember = request.getParameter("remember")!=null;
-        Account account = new AccountDAO().login(username, password);
-            if (account != null) {        
-                 if (remember) {
-                Cookie usernameCookie = new Cookie("username", username);
-                usernameCookie.setMaxAge(60*60*24*2);
-                Cookie passwordCookie = new Cookie("password", password);
-                passwordCookie.setMaxAge(60*60*24*2);
-                response.addCookie(usernameCookie);
-                response.addCookie(passwordCookie);
-            }
+        boolean remember = request.getParameter("remember") != null;
+        HttpSession session = request.getSession();
+        Account account = null;
+
+        account = (Account) session.getAttribute("account");
+        if (account == null) {
+            account = new AccountDAO().login(username, password);
+            if (account != null) {
+                if (remember) {
+                    Cookie usernameCookie = new Cookie("username", username);
+                    usernameCookie.setMaxAge(60 * 60 * 24 * 2);
+                    Cookie passwordCookie = new Cookie("password", password);
+                    passwordCookie.setMaxAge(60 * 60 * 24 * 2);
+                    response.addCookie(usernameCookie);
+                    response.addCookie(passwordCookie);
+                }
                 request.setAttribute("account", account);
-                HttpSession session =  request.getSession();              
                 session.setAttribute("account", account);
-                response.sendRedirect("Home");
-                
-                
+                //Redirect for user and admin
+                if (account.getRole().equals("ADMIN")) {
+                    response.sendRedirect("admin");
+                } else {
+                    response.sendRedirect("Home");
+
+                }
+
             } else {
+
                 request.setAttribute("classAlert", "alert alert-danger");
                 request.setAttribute("strongAlert", "Cảnh báo");
                 request.setAttribute("alert", "Bạn đã nhập sai tài khoản hoặc mật khẩu!Xin vui lòng nhập lại!");
-                
+
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
+        } else {
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+        }
     }
 
     /**

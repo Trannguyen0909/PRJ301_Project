@@ -5,12 +5,9 @@
  */
 package controller;
 
-import dal.AccountDAO;
-import dal.DetailDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,9 +18,7 @@ import model.Account;
  *
  * @author FPTSHOP-ACER
  */
-
-@WebServlet(name = "UpdateMemberController", urlPatterns = {"/UpdateMemberController"})
-public class UpdateMemberController extends HttpServlet {
+public class UpdatePageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,28 +34,24 @@ public class UpdateMemberController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-            String url = "";
             String msg = "";
+            String url = "";
             try {
                 HttpSession session = request.getSession();
                 Account account = (Account) session.getAttribute("account");
-                AccountDAO accountDAO = new AccountDAO();
-                if (account == null) {
-                    url = "login.jsp";
+                int detailsId = Integer.parseInt(request.getParameter("detailsId"));
+                int groupId = Integer.parseInt(request.getParameter("groupId"));
+                if (account != null) {
+                    url = "UpdateMember.jsp";
                 } else {
-                    int groupId = Integer.parseInt(request.getParameter("groupId"));
-                    int id = Integer.parseInt(request.getParameter("userId"));
-                    String displayName = request.getParameter("displayName");
-                    String address = request.getParameter("address");
-                    String email = request.getParameter("gmail");
-                    String phone = request.getParameter("phone");
-                    accountDAO.UpdateAccount(id, account.getUsername(), account.getPassword(), displayName, address, email, phone);
-                    url = "detail?groupId=" + groupId;
+                    url = "login.jsp";
+                    msg = "YOU MUST LOGIN!";
                 }
-
+                request.setAttribute("UPDATEPAGE_MSG", msg);
+                request.setAttribute("detailsId", detailsId);
+                request.setAttribute("groupId", groupId);
             } catch (Exception e) {
-                log("ERROR AT UPDATEMEMBER:" + e.toString());
+                log("ERROR AT UPDATE PAGECONTROLLER:" + e.toString());
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
@@ -79,8 +70,7 @@ public class UpdateMemberController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("UpdateMember.jsp").forward(request, response);
-
+        processRequest(request, response);
     }
 
     /**

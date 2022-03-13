@@ -36,15 +36,40 @@ public class FilterGroupController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int groupId = Integer.parseInt(request.getParameter("groupId"));
-            List<Group> listGroupById = new GroupDAO().getGroupById();
-//        List<Group>listGroups = new GroupDAO().getAllGroups();
             HttpSession session = request.getSession();
-            session.setAttribute("listGroupById", listGroupById);
-            List<Group> groupsByGroupId = new GroupDAO().getGroupsByGroupId(groupId);
-            request.setAttribute("groupsByGroupId", groupsByGroupId);
-            session.setAttribute("groupsByGroupId", groupsByGroupId);
-            request.getRequestDispatcher("travelDetail.jsp").forward(request, response);
+            //GetGroupvalue
+            int groupValue = Integer.parseInt(request.getParameter("groupValue"));
+            //Paging
+            int page = 1;
+            final int PAGE_SIZE = 5;
+            if (request.getParameter("pageGroup") == null) {
+                String pageStr = request.getParameter("page");
+                if (pageStr != null) {
+                    page = Integer.parseInt(pageStr);
+                }
+            } else {
+                String pageStr = request.getParameter("pageGroup");
+                if (pageStr != null) {
+                    page = Integer.parseInt(pageStr);
+                }
+            }
+
+            int totalGroup = new GroupDAO().getTotalGroupByGroupValue(groupValue);
+            int totalPage = totalGroup / PAGE_SIZE;
+            if (totalGroup % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
+            List<Group> groupDetailsByGroupValue = new GroupDAO().getGroupByValueWithPagging(page, PAGE_SIZE, groupValue);
+            request.setAttribute("listGroupDetails", groupDetailsByGroupValue);
+//            session.setAttribute("groupsByGroupId", groupsByGroupId);
+
+            //Set Attribute for Pageging
+            request.setAttribute("pageGroup", page);
+            request.setAttribute("totalPageGroup", totalPage);
+            request.setAttribute("groupValue", groupValue);
+
+            //khong can dung den travelDetail.jsp
+            request.getRequestDispatcher("travel.jsp").forward(request, response);
         }
     }
 

@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +19,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Group {
+public class Group implements Serializable {
     private int id;
     private int groupValue;
     private String groupName;

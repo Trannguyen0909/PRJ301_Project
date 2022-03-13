@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -30,9 +32,25 @@ public class AdminController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-           request.getRequestDispatcher("../dashboard.jsp").forward(request, response);
-           
+        String url = "";
+        try {
+            HttpSession session = request.getSession();
+            Account account = (Account) session.getAttribute("account");
+            if (account == null) {
+                url = "login.jsp";
+            } else {
+                if (account.getRole().equals("USER")) {
+                    url = "accessDenial.html";
+                } else {
+                    url = "dashboard.jsp";
+                }
+            }
+
+        } catch (Exception e) {
+            log("ERROR AT ADMIN CONTROLLER:" + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+
         }
     }
 

@@ -47,7 +47,7 @@
             <div class="row">
                 <div class="col-md-3 mb-5"><ul class="list-group">
                         <h3>Du lịch Yên Bái</h3>
-                        <c:forEach items="${sessionScope.listGroupByValue}" var = "g">
+                        <c:forEach items="${sessionScope.listGroupByGroupValue}" var = "g">
                             <li  class="list-group-item"><a href="filter-group?groupValue=${g.groupValue}">${g.groupName}</a></li>
                             </c:forEach>                       
                     </ul> </div>
@@ -65,7 +65,7 @@
                                 <th>Tìm hiểu thêm</th>
                             </tr>
                         </thead>
-                        <c:forEach items="${listGroups}" var = "L" >
+                        <c:forEach items="${listGroupDetails}" var = "L" >
 
                             <tbody>
                                 <tr>
@@ -75,7 +75,7 @@
                                     <td>${L.to_date}</td>
                                     <td>${L.quantity}</td>
                                     <td>${L.price}</td>
-                                    <td><a href="detail?id=${L.id}" type="submit" style="text-decoration: none; box-shadow: 0 3px black; ">Thông tin chi tiết</a></td>
+                                    <td><a href="detail?groupId=${L.id}" type="submit" style="text-decoration: none; box-shadow: 0 3px black; ">Thông tin chi tiết</a></td>
                                 </tr>
                             </tbody>
 
@@ -86,11 +86,20 @@
                     <nav aria-label="..." class="d-flex justify-content-center">
 
                         <ul class="pagination pagination-sm">
-                            <c:forEach begin="1" end="${totalPage}" var="i">    
+                           <c:if test="${requestScope.totalPageGroup == null}">
+                                <c:forEach begin="1" end="${requestScope.totalPage}" var="i">    
 
-                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="travel?page=${i}">${i}</a></li>
+                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="travel?page=${i}">${i}</a></li>
 
-                            </c:forEach> 
+                                </c:forEach> 
+                            </c:if>
+                            <c:if test="${requestScope.totalPageGroup != null}">
+                                <c:forEach begin="1" end="${requestScope.totalPageGroup}" var="i">    
+
+                                    <li class="page-item ${i==pageGroup?"active":""}"><a class="page-link" href="filter-group?groupValue=${requestScope.groupValue}&pageGroup=${i}">${i}</a></li>
+
+                                </c:forEach> 
+                            </c:if>
                         </ul>
                     </nav>
                 </div>

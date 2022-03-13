@@ -28,7 +28,7 @@ import model.Account;
  *
  * @author FPTSHOP-ACER
  */
-@WebFilter(filterName = "AunthenticationFilter", urlPatterns = {"/addMember","/deleteMember","/updateMember"})
+@WebFilter(filterName = "AunthenticationFilter", urlPatterns = {"/addMember", "/deleteMember", "/updateMember"})
 public class AunthenticationFilter implements Filter {
 
     @Override
@@ -64,13 +64,14 @@ public class AunthenticationFilter implements Filter {
 
             if (username != null && password != null) {
                 Account accountLogin = new AccountDAO().login(username, password);
-                if (account != null) { //cookie hợp lệ
-                    session.setAttribute("account", account);
+                if (accountLogin != null) { //cookie hợp lệ
+                    session.setAttribute("account", accountLogin);
                     chain.doFilter(request, response);
                     return;
                 }
+            } else {
+                res.sendRedirect("http://localhost:8084/ProjectPRJ/login");
             }
-            res.sendRedirect("http://localhost:8084/ProjectPRJ/login");
         }
 
     }

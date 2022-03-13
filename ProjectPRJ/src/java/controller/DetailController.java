@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Account;
 import model.Group;
 import model.MemberDetail;
 
@@ -37,17 +38,43 @@ public class DetailController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        int id = Integer.parseInt(request.getParameter("id"));
-        List<Group> groupByName = new GroupDAO().getGroupByIdGroup(id);
-        List<MemberDetail> listMember = new DetailDAO().getMemberById(id); 
-        List<Group>listGroupById = new GroupDAO().getGroupById();        
-//      List<Group>listGroups = new GroupDAO().getAllGroups();
         HttpSession session = request.getSession();
-        session.setAttribute("listGroupById", listGroupById);
-        session.setAttribute("id", id);
-        session.setAttribute("listMember", listMember);
-        request.setAttribute("listMember", listMember);
-        request.setAttribute("groupByName", groupByName);
+        String url = "";
+        try {
+            
+            Account account = (Account) session.getAttribute("account");
+
+            //get groupid
+            if (account != null) {
+                int groupId = Integer.parseInt(request.getParameter("groupId"));
+                    
+                //get 72 tr
+                float totalMoney= 0 ;
+                
+                
+                
+                List<MemberDetail> listMember = new DetailDAO().getMemberByGroupId(groupId);
+                //get total member
+                // 72tr / member = each meber
+                
+                for (MemberDetail memberDetail : listMember) {
+//                    memberDetail.setPrice(each meber);
+                }
+                
+                
+                request.setAttribute("listMember", listMember);
+                request.setAttribute("groupId", groupId);
+                request.setAttribute("userId", account.getId());
+                url = "detailmember.jsp";
+            } else {
+                url = "login.jsp";
+            }
+
+        } catch (Exception e) {
+            log("ERROR AT DETAIL CONTROLLER:" + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
         
        
         request.getRequestDispatcher("detailmember.jsp").forward(request, response);

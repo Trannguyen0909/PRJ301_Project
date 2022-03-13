@@ -64,12 +64,8 @@ public class GroupDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Group group = Group.builder()
-                        .groupValue(rs.getInt(1))                    
+                        .groupValue(rs.getInt(1))
                         .groupName(rs.getString(2))
-                        .from_date(rs.getString(3))
-                        .to_date(rs.getString(4))
-                        .quantity(countMemberId(rs.getInt(5)))
-                        .price(rs.getInt(6))
                         .build();
                 list.add(group);
             }
@@ -79,7 +75,7 @@ public class GroupDAO {
         return list;
     }
 
-     public List<Group> getGroupsByGroupValue(int groupValue) {
+    public List<Group> getGroupsByGroupValue(int groupValue) {
         List<Group> list = new ArrayList<>();
         try {
             String sql = "select * from dbo.[Group] where groupValue = ?";
@@ -104,7 +100,7 @@ public class GroupDAO {
         }
         return list;
     }
-     
+
     public int countMemberId(int id) {
         try {
             String sql = "select COUNT(*) from detail where id =?";
@@ -142,14 +138,16 @@ public class GroupDAO {
         }
         return list;
     }
+    
+    DetailDAO detailDAO = new DetailDAO();
 
-    public List<Group> getGroupWithPagging(int page, int PAGE_SIZE) {
+    public List<Group> getGroupByValueWithPagging(int page, int PAGE_SIZE, int groupValue) {
         List<Group> list = new ArrayList<>();
         try {
             String sql = "with t as (select ROW_NUMBER() over (order by g.id asc) as r ,* from dbo.[Group] as g "
                     + " where groupValue = ?)\n"
-                    + "select* from t where r between ?*?-(?-1) and ?*?";   
-            
+                    + "select* from t where r between ?*?-(?-1) and ?*?";
+
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, groupValue);
@@ -166,7 +164,7 @@ public class GroupDAO {
                         .groupName(rs.getString(4))
                         .from_date(rs.getString(5))
                         .to_date(rs.getString(6))
-                        .quantity(countMemberId(rs.getInt(2)))
+                        .quantity(detailDAO.countMemberByGroupId(rs.getInt(2)))
                         .price(rs.getInt(8))
                         .build();
                 list.add(group);
@@ -177,16 +175,63 @@ public class GroupDAO {
         return list;
     }
 
-    public int getTotalGroup() {
-
+    public List<Group> getGroupWithPagging(int page, int PAGE_SIZE) {
+        List<Group> list = new ArrayList<>();
         try {
-            String sql = "select count(id) from dbo.[group] ";
+            String sql = "with t as (select ROW_NUMBER() over (order by g.id asc) as r ,* from dbo.[Group] as g )\n"
+                    + "select* from t where r between ?*?-(?-1) and ?*?";
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, page);
+            ps.setInt(2, PAGE_SIZE);
+            ps.setInt(3, PAGE_SIZE);
+            ps.setInt(4, page);
+            ps.setInt(5, PAGE_SIZE);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Group group = Group.builder()
+                        .id(rs.getInt(2))
+                        .groupValue(rs.getInt(3))
+                        .groupName(rs.getString(4))
+                        .from_date(rs.getString(5))
+                        .to_date(rs.getString(6))
+                        .quantity(new DetailDAO().countMemberByGroupId(rs.getInt(2)))
+                        .price(rs.getInt(8))
+                        .build();             
+                list.add(group);
+            }
 
+        } catch (Exception ex) {
+            Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public int getTotalGroupByGroupValue(int groupValue) {
+        try {
+            String sql = "select count(id) from dbo.[group] where groupValue = ?";
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, groupValue);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
+                return rs.getInt(1);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public int getTotalGroup() {
+        try {
+            String sql = "select count(id) from dbo.[group]";
+            Connection conn = new DBContext().getConnection();
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 return rs.getInt(1);
             }
         } catch (Exception ex) {

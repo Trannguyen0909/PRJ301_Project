@@ -40,7 +40,7 @@ public class TravelController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-
+        
         int page = 1;
         final int PAGE_SIZE = 10;
         String pageStr = request.getParameter("page");
@@ -58,17 +58,17 @@ public class TravelController extends HttpServlet {
 //        List<Group>listGroups = new GroupDAO().getAllGroups();
 
         //session for GroupValue
-        session.setAttribute("listGroupByValue", listGroupByGroupValue);
+        session.setAttribute("listGroupByGroupValue", listGroupByGroupValue);
 
         //Request for GroupDetails
         request.setAttribute("listGroupDetails", listGroupDetails);
 
         //Paging value
         request.setAttribute("page", page);
-//        int count = detaildao.count(id);
+        request.setAttribute("totalPage", totalPage);
         
         request.getRequestDispatcher("travel.jsp").forward(request, response);
-    }
+    }      
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

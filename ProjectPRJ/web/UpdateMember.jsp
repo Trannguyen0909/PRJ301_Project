@@ -66,10 +66,13 @@
                     <div class="col-md-6 mx-auto">
                         <div class="block text-center">
                             <h2 class="text-center">Sửa tài khoản của bạn</h2>
-                            <form class="text-left clearfix mt-30" action="UpdateMemberController" method="POST" >
+                           <form class="text-left clearfix mt-30" action="UpdateMemberController" method="POST" >
+
+
                                 <input type="hidden" name="detailsId" value="${requestScope.detailsId}">
                                 <input type="hidden" name="groupId" value="${requestScope.groupId}">
                                 <input type="hidden" name="userId" value="${sessionScope.account.id}">
+
                                 <div class="form-group">
                                     <input type="text" class="form-control my-2 "  placeholder="YourName" name="displayName" value="${sessionScope.account.getDisplayName()}" >
                                 </div>

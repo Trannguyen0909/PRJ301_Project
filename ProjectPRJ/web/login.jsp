@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,9 +29,12 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
+        
     <c:if test="${sessionScope.account != null}">
-        <c:redirect url="home.jsp"></c:redirect>
-    </c:if>
+            <c:redirect url="home.jsp"></c:redirect>
+        </c:if>
+        
+        
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">

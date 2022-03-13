@@ -55,9 +55,7 @@ public class DeleteMemberController extends HttpServlet {
         HttpSession session = request.getSession();
         String url = "";
         String msg = "";
-        try {
-
-            HttpSession session = request.getSession();
+        try {            
             DetailDAO detailDAO = new DetailDAO();
 
             int detailsId = Integer.parseInt(request.getParameter("detailsId"));

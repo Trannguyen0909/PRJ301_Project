@@ -51,7 +51,7 @@
 
                 <div class="col-md-3 mb-5"><ul class="list-group">
                         <h3>Du lịch Yên Bái</h3>
-                        <c:forEach items="${sessionScope.listGroupByValue}" var = "g">
+                        <c:forEach items="${sessionScope.listGroupByGroupValue}" var = "g">
                             <li  class="list-group-item"><a href="filter-group?groupValue=${g.groupValue}">${g.groupName}</a></li>
                             </c:forEach>                      
                     </ul></div>
@@ -83,30 +83,45 @@
                             </tr>
                         </thead>
 
-                         <c:forEach items="${requestScope.listMember}" var = "M" >
+                        <c:forEach items="${requestScope.listMember}" var = "M" >
 
                             <tbody>
                                 <tr> 
-                                    <td>${M.memberId}</td>
+                                    <td>${M.id}</td>
+                                    <td>${M.groupValue}</td>
                                     <td>${M.memberName}</td>
                                     <td>${M.gmail}</td>
                                     <td>${M.phone}</td>                                   
                                     <td>${M.price}</td>
-                                    <td><a  style="padding: 5px; border-radius: 5px;" class="btn btn-outline-primary" href="updateMember?memberId=${M.memberId}"> update <i class="bi bi-arrow-up-circle-fill"></i> </a>
-                                        <a style="padding: 5px; border-radius: 5px;" class="btn btn-outline-danger" href="deleteMember?memberId=${M.memberId}" onclick="if (confirm('Delete selected item?')) {
-                                                    return true;
-                                                } else {
-                                                    event.stopPropagation();
-                                                    event.preventDefault();
-                                                }
-                                                ;">delete <i class="bi bi-trash"></i></a> 
+                                    <td>
+                                        <c:if test="${sessionScope.account != null}">
+                                            <c:if test="${sessionScope.account.id eq M.userId}">
+                                                <a  style="padding: 5px; border-radius: 5px;" class="btn btn-outline-primary" href="UpdatePageController?detailsId=${M.id}&groupId=${requestScope.groupId}"> update <i class="bi bi-arrow-up-circle-fill"></i> </a>
+                                                <a style="padding: 5px; border-radius: 5px;" class="btn btn-outline-danger" href="deleteMember?detailsId=${M.id}&groupId=${requestScope.groupId}" onclick="if (confirm('Delete selected item?')) {
+                                                            return true;
+                                                        } else {
+                                                            event.stopPropagation();
+                                                            event.preventDefault();
+                                                        }
+                                                        ;">delete <i class="bi bi-trash"></i></a> 
+                                                </c:if>
+                                            </c:if>
                                     </td>
                                 </tr>
                             </tbody>
                         </c:forEach>
 
-                    </table>                 
-                    <a href="addMember?id=${sessionScope.id}" type="button" style="margin-bottom: 10px" class="btn btn-success">Đăng ký chuyến đi</a>
+                    </table> 
+                    <c:if test="${requestScope.ADDMEMBER_MSG != null}">
+                        <p style="color: red">${requestScope.ADDMEMBER_MSG}</p>
+                    </c:if>
+                    <c:if test="${requestScope.DELETEMEMBER_MSG != null}">
+                        <p style="color: red">${requestScope.DELETEMEMBER_MSG}</p>
+                    </c:if>
+
+                    <c:if test="${sessionScope.account.role ne 'ADMIN'}">
+                        <a href="addMember?groupId=${requestScope.groupId}" type="button" style="margin-bottom: 10px" class="btn btn-success">Đăng ký chuyến đi</a>
+                    </c:if>
                 </div>
             </div>
 

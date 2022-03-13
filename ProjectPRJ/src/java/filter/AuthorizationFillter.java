@@ -37,14 +37,19 @@ public class AuthorizationFillter implements Filter {
         HttpSession session = req.getSession();
         //Kiểm tra đăng nhập
         Account account = (Account) session.getAttribute("account");
-
-        if (account != null && account.getRole().equals(Account.ADMIN)) {
-            //cho qua
-            chain.doFilter(request, response);
-            return;
+        if (account != null) {
+            if (account.getRole().equals("ADMIN")) {
+                //cho qua
+                chain.doFilter(request, response);
+                return;
+            } else {
+//                chain.doFilter(request, response);
+                req.getRequestDispatcher("home.jsp").forward(request, response);
+            }
+        } else {
+            req.getRequestDispatcher("login.jsp").forward(request, response);
         }
-//        req.setAttribute("error", "You are not permission");
-        req.getRequestDispatcher("../login.jsp").forward(request, response);
+
     }
 
     @Override
