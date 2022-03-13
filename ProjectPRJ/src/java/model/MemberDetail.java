@@ -28,4 +28,5 @@ public class MemberDetail implements Serializable {
     private String gmail;
     private String phone;
     private int price;  
+    private String role;
 }

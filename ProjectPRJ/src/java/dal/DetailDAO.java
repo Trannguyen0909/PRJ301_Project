@@ -29,7 +29,7 @@ public class DetailDAO {
 
         List<MemberDetail> listMember = new ArrayList<>();
         try {
-            String sql = "select d.id , d.userId, g.groupValue, a.displayName, a.email, a.phone, g.price\n"
+            String sql = "select d.id , d.userId, g.groupValue, a.displayName, a.email, a.phone, g.price,a.role \n"
                     + "from dbo.Details d\n"
                     + "inner join dbo.[Group] g\n"
                     + "on d.groupId = g.id\n"
@@ -49,6 +49,7 @@ public class DetailDAO {
                         .gmail(rs.getString(5))
                         .phone(rs.getString(6))
                         .price(rs.getInt(7))
+                        .role(rs.getString(8))
                         .build();
                 listMember.add(memberDetail);
             }
@@ -81,7 +82,7 @@ public class DetailDAO {
     public List<MemberDetail> searchDetails(String keyword, int groupId) {
         List<MemberDetail> list = new ArrayList<>();
         try {
-            String sql = "select d.id, d.userId ,g.groupValue, a.displayName, a.email, a.phone, g.price\n"
+            String sql = "select d.id, d.userId ,g.groupValue, a.displayName, a.email, a.phone, g.price,a.role\n"
                     + "from dbo.Details d\n"
                     + "inner join dbo.[Group] g\n"
                     + "on d.groupId = g.id\n"
@@ -102,6 +103,7 @@ public class DetailDAO {
                         .gmail(rs.getString(5))
                         .phone(rs.getString(6))
                         .price(rs.getInt(7))
+                        .role(rs.getString(8))
                         .build();
                 list.add(memberDetail);
             }

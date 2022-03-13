@@ -55,15 +55,11 @@ public class AddMemberController extends HttpServlet {
                     msg = "Bạn phải đăng nhập !!!";
                 } else {
                     
-                    //check groupId countMember = 10
+                   //check groupId countMember = 10
                     //groupId get quanity (VD: 10)
                     // countmember == quanity (da du so luong)
-                    //=> ko cho e dang ki
-                    //else if(countmember < quantity) {  }
-                    
-                    
-                    
-
+                    //=> ko cho  dang ki
+                    //else if(countmember < quantity) {  }                                                        
                     if (detailDAO.checkMemberExistInGroup(account.getId(), groupId)) {
                         url = "detail?groupId=" + groupId;
                         msg = "Bạn đã đăng ký rồi mà!";

@@ -61,7 +61,7 @@
                                 <th>Ngày Đi</th>
                                 <th>Ngày Về</th>
                                 <th>Số người đã đăng ký</th>
-                                <th>Bảng giá(VND)/Nhóm</th>
+                                <th>Bảng giá(VND)/Người</th>
                                 <th>Tìm hiểu thêm</th>
                             </tr>
                         </thead>
