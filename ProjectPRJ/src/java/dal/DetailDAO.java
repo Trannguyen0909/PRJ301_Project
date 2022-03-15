@@ -136,7 +136,7 @@ public class DetailDAO {
 
         return false;
     }
-
+    
     public void addMember(int userId, int groupId) {
         try {
             String sql = "insert into dbo.Details values(?,?,1)";

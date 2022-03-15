@@ -28,39 +28,48 @@
         </c:if>
 
 
-        <div class="aligncenter">
-            <!-- On tables -->
-            <table class="table caption-top">
-                <caption>List of users</caption>
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="container">
+            <h2>Manager User</h2>
+
+            <div class="col-md-auto">
+                <!-- On tables -->
+                <table class="table table-dark table-striped table-hover">
+                    <caption>List of users</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">username</th>
+                            <th scope="col">displayName</th>
+                            <th scope="col">address</th>
+                            <th scope="col">email</th>
+                            <th scope="col">phone</th>
+                            <th scope="col">role</th>
+                            <th scope="col">status</th>
+                            <th scope="col">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="a" items="${requestScope.LIST_ACCOUNT}">
+
+                            <tr>
+                                <td>${a.id}</td>
+                                <td>${a.username}</td>
+                                <td>${a.displayName}</td>
+                                <td>${a.address}</td>
+                                <td>${a.email}</td>
+                                <td>${a.phone}</td>
+                                <td>${a.role}</td>
+                                <td>${a.status}</td>
+                                <td>
+                                    <a href="#" class="btn btn-danger">Delete</a>
+                                    <a href="#" class="btn btn-primary">Update</a>
+
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
 

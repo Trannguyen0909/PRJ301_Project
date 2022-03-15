@@ -9,6 +9,7 @@ import context.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
@@ -133,5 +134,43 @@ public class AccountDAO {
             Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public ArrayList<Account> getAllUserAccount(int status) throws Exception {
+        ArrayList<Account> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = new DBContext().getConnection();
+            if (cn != null) {
+                String sql = "Select id, username, password, displayName, address, email, phone, role, status\n"
+                        + "from Account\n"
+                        + "Where status = ? and role = 'USER'";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, status);
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    Account acc = Account.builder()
+                            .id(rs.getInt(1))
+                            .username(rs.getString(2))
+                            .password(rs.getString(3))
+                            .displayName(rs.getString(4))
+                            .address(rs.getString(5))
+                            .email(rs.getString(6))
+                            .phone(rs.getString(7))
+                            .role(rs.getString(8))
+                            .status(rs.getBoolean(9))
+                            .build();
+                    list.add(acc);
+                }
+
+            }
+
+        } finally {
+            if (cn != null) {
+                cn.close();
+            }
+
+        }
+        return list;
+    }
+    
 
 }
