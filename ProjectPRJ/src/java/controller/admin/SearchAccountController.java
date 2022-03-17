@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.admin;
 
 import dal.AccountDAO;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,9 +19,10 @@ import model.Account;
 
 /**
  *
- * @author FPTSHOP-ACER
+ * @author Fang Long
  */
-public class AdminController extends HttpServlet {
+@WebServlet(name = "SearchAccountController", urlPatterns = {"/SearchAccountController"})
+public class SearchAccountController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,38 +35,27 @@ public class AdminController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        String url = "";
+        response.setContentType("text/html;charset=UTF-8");
+        String msg = "";
         try {
             HttpSession session = request.getSession();
+            String keyword = request.getParameter("keyword");
             Account account = (Account) session.getAttribute("account");
-            if (account == null) {
-                url = "login.jsp";
+            if (account != null && account.getRole().equals("ADMIN")) {
+                AccountDAO accountDAO = new AccountDAO();
+                List<Account> list = accountDAO.getAccounts(keyword);
+                request.setAttribute("LIST_ACCOUNT", list);
+                msg = "Search Success!!";
+                request.setAttribute("SEARCH_ADMIN_MSG", msg);
+                request.getRequestDispatcher("dashboard.jsp").forward(request, response);
             } else {
-                if (account.getRole().equals("USER")) {
-                    url = "accessDenial.html";
-                } else {
-                    int status = 1;
-                    if (request.getParameter("status") != null) {
-                        status = Integer.parseInt(request.getParameter("status"));
-                    }
-
-                    //1. Get the user For the admin
-                    AccountDAO accountDAO = new AccountDAO();
-                    ArrayList<Account> list = accountDAO.getAllUserAccount(status);
-
-                    request.setAttribute("LIST_ACCOUNT", list);
-
-                    url = "dashboard.jsp";
-                }
+                msg = "Something not right!";
+                request.setAttribute("SEARCH_ADMIN_MSG", msg);
+                request.getRequestDispatcher("Notfound.jsp").forward(request, response);
             }
 
         } catch (Exception e) {
-            log("ERROR AT ADMIN CONTROLLER:" + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-
+            e.printStackTrace();
         }
     }
 

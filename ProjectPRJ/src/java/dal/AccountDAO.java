@@ -134,6 +134,40 @@ public class AccountDAO {
             Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public boolean insertAccount(Account newAccount) throws Exception {
+        Connection cn = null;
+        try {
+            cn = new DBContext().getConnection();
+            if (cn != null) {
+                String sql = "INSERT INTO [dbo].[Account]\n"
+                        + "           ([username] ,[password],[displayName],[address],[email],[phone],[role],[status])\n"
+                        + "     VALUES (?,?,?,?,?,?,?,?)";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, newAccount.getUsername());
+                pst.setString(2, newAccount.getPassword());
+                pst.setString(3, newAccount.getDisplayName());
+                pst.setString(4, newAccount.getAddress());
+                pst.setString(5, newAccount.getEmail());
+                pst.setString(6, newAccount.getPhone());
+                pst.setString(7, newAccount.getRole());
+                pst.setBoolean(8, newAccount.isStatus());
+
+                if (pst.executeUpdate() > 0) {
+                    return true;
+                }
+            }
+
+        } finally {
+            if (cn != null) {
+                cn.close();
+            }
+        }
+
+        return false;
+    }
+    
+    
     public ArrayList<Account> getAllUserAccount(int status) throws Exception {
         ArrayList<Account> list = new ArrayList<>();
         Connection cn = null;
