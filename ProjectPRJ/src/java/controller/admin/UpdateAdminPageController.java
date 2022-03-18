@@ -13,13 +13,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
  * @author FPTSHOP-ACER
  */
-@WebServlet(name = "DeleteAccountController", urlPatterns = {"/DeleteAccountController"})
-public class DeleteAccountController extends HttpServlet {
+@WebServlet(name = "UpdateAdminPageController", urlPatterns = {"/UpdateAdminPageController"})
+public class UpdateAdminPageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,21 +37,22 @@ public class DeleteAccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             int userId = Integer.parseInt(request.getParameter("userid"));
-
-            AccountDAO accountDAO = new AccountDAO();
+            HttpSession session = request.getSession();
+            String url = "";
             String msg = "";
+            Account account = (Account) session.getAttribute("account");
+            if (account.getRole().equals("ADMIN")) {
 
-            //delete account status
-            if (accountDAO.updateAccountStatus(userId, 0)) {
-                msg = "Delete Account Status Success!";
-                request.setAttribute("DELETE_MSG", msg);
-                request.getRequestDispatcher("MainController?action=searchAdmin&keyword=").forward(request, response);
+                AccountDAO accountDAO = new AccountDAO();
+                Account acc = accountDAO.getAccountDetail(userId);
+
+                request.setAttribute("ACCOUNT_DETAIL", acc);
+                url = "updateAccount.jsp";
+
             } else {
-                msg = "Delete Fail";
-                request.setAttribute("DELETE_MSG", msg);
-                request.getRequestDispatcher("MainController?action=searchAdmin&keyword=").forward(request, response);
-
+                url = "Home";
             }
+            request.getRequestDispatcher(url).forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();

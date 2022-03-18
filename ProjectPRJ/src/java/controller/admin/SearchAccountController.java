@@ -19,7 +19,7 @@ import model.Account;
 
 /**
  *
- * @author Fang Long
+ * @author FPTSHOP-ACER
  */
 @WebServlet(name = "SearchAccountController", urlPatterns = {"/SearchAccountController"})
 public class SearchAccountController extends HttpServlet {
@@ -43,11 +43,35 @@ public class SearchAccountController extends HttpServlet {
             Account account = (Account) session.getAttribute("account");
             if (account != null && account.getRole().equals("ADMIN")) {
                 AccountDAO accountDAO = new AccountDAO();
-                List<Account> list = accountDAO.getAccounts(keyword);
+
+                //Paging
+                int page = 1;
+                final int PAGE_SIZE = 10;
+                String pageStr = request.getParameter("page");
+                if (pageStr != null) {
+                    page = Integer.parseInt(pageStr);
+                }
+                int totalGroup = new AccountDAO().getTotalAccount();
+                int totalPage = totalGroup / PAGE_SIZE;
+                if (totalGroup % PAGE_SIZE != 0) {
+                    totalPage += 1;
+                }
+
+                List<Account> list = null;
+//                list = accountDAO.getAccounts(keyword);
+                list = accountDAO.getAccountsPaging(keyword, page, PAGE_SIZE);
+
                 request.setAttribute("LIST_ACCOUNT", list);
+
                 msg = "Search Success!!";
                 request.setAttribute("SEARCH_ADMIN_MSG", msg);
+                //Paging value
+
+                request.setAttribute("page", page);
+                request.setAttribute("totalPage", totalPage);
+
                 request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+
             } else {
                 msg = "Something not right!";
                 request.setAttribute("SEARCH_ADMIN_MSG", msg);

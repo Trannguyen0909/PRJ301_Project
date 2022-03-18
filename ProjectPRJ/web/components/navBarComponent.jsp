@@ -19,6 +19,11 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="Home">Trang chủ</a></li>
+                    <c:if  test="${sessionScope.account != null}">
+                        <c:if test="${sessionScope.account.role eq 'ADMIN'}">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="admin">Admin</a></li>
+                        </c:if>
+                    </c:if>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="food.jsp">Ẩm Thực</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="travel">Du lịch</a></li>
 

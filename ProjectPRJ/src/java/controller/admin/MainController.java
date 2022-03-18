@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Fang Long
+ * @author FPTSHOP-ACER
  */
 @WebServlet(name = "MainController", urlPatterns = {"/MainController"})
 public class MainController extends HttpServlet {
@@ -53,6 +53,9 @@ public class MainController extends HttpServlet {
             
             else if (action.equals("searchAdmin")) {
                 url = "SearchAccountController";
+            }else if(action.equals("activeAdmin")){
+                url = "ActiveAdminController";
+                
             }
 
         } catch (Exception e) {

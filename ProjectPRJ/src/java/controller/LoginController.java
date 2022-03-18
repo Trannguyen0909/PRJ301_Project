@@ -71,10 +71,12 @@ public class LoginController extends HttpServlet {
 
         if (username != null && password != null) {
             Account account = new AccountDAO().login(username, password);
-            if (account != null) { //cookie hợp lệ
+            if (account != null && account.isStatus()) { //cookie hợp lệ
                 request.getSession().setAttribute("account", account);
                 response.sendRedirect("Home");
                 return;
+            }else{
+                response.sendRedirect("Home");
             }
         } else {
             HttpSession session = request.getSession();
@@ -111,7 +113,7 @@ public class LoginController extends HttpServlet {
         account = (Account) session.getAttribute("account");
         if (account == null) {
             account = new AccountDAO().login(username, password);
-            if (account != null) {
+            if (account != null && account.isStatus()) {
                 if (remember) {
                     Cookie usernameCookie = new Cookie("username", username);
                     usernameCookie.setMaxAge(60 * 60 * 24 * 2);

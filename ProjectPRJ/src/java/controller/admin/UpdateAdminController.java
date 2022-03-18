@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import lombok.Builder;
 import model.Account;
 import utils.CheckValidation;
 
@@ -23,8 +22,8 @@ import utils.CheckValidation;
  *
  * @author FPTSHOP-ACER
  */
-@WebServlet(name = "InsertAccountController", urlPatterns = {"/InsertAccountController"})
-public class InsertAccountController extends HttpServlet {
+@WebServlet(name = "UpdateAdminController", urlPatterns = {"/UpdateAdminController"})
+public class UpdateAdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,6 +44,7 @@ public class InsertAccountController extends HttpServlet {
 
                 AccountDAO accountDAO = new AccountDAO();
 
+                int userId = Integer.parseInt(request.getParameter("txtuserid"));
                 String email = request.getParameter("txtemail");
                 String fullname = request.getParameter("txtfullname");
                 String password = request.getParameter("txtpassword");
@@ -84,29 +84,16 @@ public class InsertAccountController extends HttpServlet {
                 }
 
                 if (check == true) {
-                    Account acc = Account.builder()
-                            .id(1)
-                            .username(email)
-                            .password(password)
-                            .displayName(fullname)
-                            .address(address)
-                            .email(email)
-                            .phone(phone)
-                            .role(role.toUpperCase())
-                            .status(true)
-                            .build();
-                    if (accountDAO.insertAccount(acc)) {
-                        msg = "Insert Success!";
-                        request.setAttribute("INSERT_MSG", msg);
-
-                        request.getRequestDispatcher("admin").forward(request, response);
-                    }
+                    accountDAO.UpdateAccount(userId, email, password, fullname, address, email, phone);
+                    msg = "Update Success!";
+                    request.setAttribute("UPDATE_MSG", msg);
+                    request.getRequestDispatcher("admin").forward(request, response);
 
                 } else {
                     msg = "Insert fail!";
-                    request.setAttribute("INSERT_MSG", msg);
+                    request.setAttribute("UPDATE_MSG", msg);
                     request.setAttribute("ACCOUNT_ERROR", accountError);
-                    request.getRequestDispatcher("MainController?action=insertAdminPage").forward(request, response);
+                    request.getRequestDispatcher("MainController?action=updateAdminPage&userid=" + userId).forward(request, response);
                 }
 
             }

@@ -50,12 +50,12 @@ public class AdminController extends HttpServlet {
                     }
 
                     //1. Get the user For the admin
-                    AccountDAO accountDAO = new AccountDAO();
-                    ArrayList<Account> list = accountDAO.getAllUserAccount(status);
+//                    AccountDAO accountDAO = new AccountDAO();
+//                    ArrayList<Account> list = accountDAO.getAccounts("");
+//
+//                    request.setAttribute("LIST_ACCOUNT", list);
 
-                    request.setAttribute("LIST_ACCOUNT", list);
-
-                    url = "dashboard.jsp";
+                    url = "MainController?action=searchAdmin&keyword=&page=1";
                 }
             }
 

@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author FPTSHOP-ACER
  */
-@WebServlet(name = "DeleteAccountController", urlPatterns = {"/DeleteAccountController"})
-public class DeleteAccountController extends HttpServlet {
+@WebServlet(name = "ActiveAdminController", urlPatterns = {"/ActiveAdminController"})
+public class ActiveAdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,13 +40,13 @@ public class DeleteAccountController extends HttpServlet {
             String msg = "";
 
             //delete account status
-            if (accountDAO.updateAccountStatus(userId, 0)) {
+            if (accountDAO.updateAccountStatus(userId, 1)) {
                 msg = "Delete Account Status Success!";
-                request.setAttribute("DELETE_MSG", msg);
+                request.setAttribute("ACTIVE_MSG", msg);
                 request.getRequestDispatcher("MainController?action=searchAdmin&keyword=").forward(request, response);
             } else {
                 msg = "Delete Fail";
-                request.setAttribute("DELETE_MSG", msg);
+                request.setAttribute("ACTIVE_MSG", msg);
                 request.getRequestDispatcher("MainController?action=searchAdmin&keyword=").forward(request, response);
 
             }
