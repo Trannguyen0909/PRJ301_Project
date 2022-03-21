@@ -27,5 +27,6 @@ public class Group implements Serializable {
     private String to_date;
     private int quantity;
     private int price;
+    private boolean status;
     
 }

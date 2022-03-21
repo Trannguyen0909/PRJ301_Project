@@ -9,6 +9,7 @@ import context.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -52,6 +53,105 @@ public class GroupDAO {
             Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+    
+    public List<Group> searchGroupByValueWithPaggingAdmin(int page, int PAGE_SIZE, String groupValue) {
+        List<Group> list = new ArrayList<>();
+        try {
+            String sql = "with t as (select ROW_NUMBER() over (order by g.id asc) as r ,* from dbo.[Group] as g "
+                    + " where groupValue like ?)\n"
+                    + "select* from t where r between ?*?-(?-1) and ?*?";
+
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + groupValue + "%");
+            ps.setInt(2, page);
+            ps.setInt(3, PAGE_SIZE);
+            ps.setInt(4, PAGE_SIZE);
+            ps.setInt(5, page);
+            ps.setInt(6, PAGE_SIZE);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Group group = Group.builder()
+                        .id(rs.getInt(2))
+                        .groupValue(rs.getInt(3))
+                        .groupName(rs.getString(4))
+                        .from_date(rs.getString(5))
+                        .to_date(rs.getString(6))
+                        .quantity(rs.getInt(7))
+                        .price(rs.getInt(8))
+                        .status(rs.getBoolean(9))
+                        .build();
+                list.add(group);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    
+    
+    public static boolean insertGroup(Group group) throws SQLException, Exception {
+        Connection cn = null;
+        try {
+            cn = new DBContext().getConnection();
+            if (cn != null) {
+                String sql = "INSERT INTO [dbo].[Group]\n"
+                        + "           ([groupValue]\n"
+                        + "           ,[groupName]\n"
+                        + "           ,[fromDate]\n"
+                        + "           ,[toDate]\n"
+                        + "           ,[quantity]\n"
+                        + "           ,[price]\n"
+                        + "           ,[status])\n"
+                        + "     VALUES\n"
+                        + "           (?,?,?,?,?,?,?)\n";
+
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, group.getGroupValue());
+                pst.setString(2, group.getGroupName());
+                pst.setString(3, group.getFrom_date());
+                pst.setString(4, group.getTo_date());
+                pst.setInt(5, group.getQuantity());
+                pst.setInt(6, group.getPrice());
+                pst.setBoolean(7, group.isStatus());
+
+                if (pst.executeUpdate() > 0) {
+                    return true;
+                }
+            }
+
+        } finally {
+            if (cn != null) {
+                cn.close();
+            }
+        }
+        return false;
+    }
+    
+    
+    public static boolean updateGroupStatus(int groupid, boolean status) throws SQLException, Exception {
+        Connection cn = null;
+        try {
+            cn = new DBContext().getConnection();
+            if (cn != null) {
+                String sql = "update dbo.[Group]\n"
+                        + "set status = ?\n"
+                        + "where id = ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setBoolean(1, status);
+                pst.setInt(2, groupid);
+                if (pst.executeUpdate() > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (cn != null) {
+                cn.close();
+            }
+        }
+        return false;
     }
 
     //GetGroupByGroupValue
@@ -145,7 +245,7 @@ public class GroupDAO {
         List<Group> list = new ArrayList<>();
         try {
             String sql = "with t as (select ROW_NUMBER() over (order by g.id asc) as r ,* from dbo.[Group] as g "
-                    + " where groupValue = ?)\n"
+                    + " where groupValue = ? and status = 1)\n"
                     + "select* from t where r between ?*?-(?-1) and ?*?";
 
             Connection conn = new DBContext().getConnection();
@@ -178,7 +278,7 @@ public class GroupDAO {
     public List<Group> getGroupWithPagging(int page, int PAGE_SIZE) {
         List<Group> list = new ArrayList<>();
         try {
-            String sql = "with t as (select ROW_NUMBER() over (order by g.id asc) as r ,* from dbo.[Group] as g )\n"
+            String sql = "with t as (select ROW_NUMBER() over (order by g.id asc) as r ,* from dbo.[Group] as g where status = 1)\n"
                     + "select* from t where r between ?*?-(?-1) and ?*?";
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);

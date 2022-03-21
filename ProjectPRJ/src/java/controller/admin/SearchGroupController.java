@@ -5,22 +5,26 @@
  */
 package controller.admin;
 
+import dal.AccountDAO;
+import dal.GroupDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Account;
+import model.Group;
 
 /**
  *
- * @author FPTSHOP-ACER
+ * @author Fang Long
  */
-@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
-public class MainController extends HttpServlet {
-
-    private static String url = "Notfound.jsp";
+@WebServlet(name = "SearchGroupController", urlPatterns = {"/SearchGroupController"})
+public class SearchGroupController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,44 +39,39 @@ public class MainController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            String action = request.getParameter("action");
-            if (action == null || action.isEmpty()) {
 
-            } else if (action.equals("insertAdmin")) {
-                url = "InsertAccountController";
-            } else if (action.equals("deleteAdmin")) {
-                url = "DeleteAccountController";
-            } else if (action.equals("updateAdmin")) {
-                url = "UpdateAdminController";
-            } else if (action.equals("insertAdminPage")) {
-                url = "insertAccount.jsp";
-            }else if(action.equals("updateAdminPage")){
-                url = "UpdateAdminPageController";
-            }
-            
-            
-            else if (action.equals("searchAdmin")) {
-                url = "SearchAccountController";
-            }else if(action.equals("activeAdmin")){
-                url = "ActiveAdminController";
-                
-            }
-            
-            else if (action.equals("searchGroup")) {
-                url = "SearchGroupController";
-            } else if (action.equals("insertGroupAdminPage")) {
-                url = "InsertAdminGroupPageController";
+            HttpSession session = request.getSession();
+            if (session != null) {
+                Account account = (Account) session.getAttribute("account");
+                if (account != null) {
+                    int page = 1;
+                    final int PAGE_SIZE = 10;
+                    String pageStr = request.getParameter("page");
+                    if (pageStr != null) {
+                        page = Integer.parseInt(pageStr);
+                    }
+                    int totalGroup = new GroupDAO().getTotalGroup();
+                    int totalPage = totalGroup / PAGE_SIZE;
+                    if (totalGroup % PAGE_SIZE != 0) {
+                        totalPage += 1;
+                    }
 
-            }else if(action.equals("insertGroupAdmin")){
-                url = "InsertGroupAdminController";
-            }else if(action.equals("updateGroupStatus")){
-                url = "UpdateGroupStatusController";
-            }
+                    String keyword = request.getParameter("keyword");
 
+                    GroupDAO groupDAO = new GroupDAO();
+                    ArrayList<Group> listGroups = (ArrayList<Group>) groupDAO.searchGroupByValueWithPaggingAdmin(page, PAGE_SIZE, keyword);
+
+                    request.setAttribute("page", page);
+                    request.setAttribute("totalPage", totalPage);
+
+                    request.setAttribute("listGroups", listGroups);
+
+                    request.getRequestDispatcher("manageGroup.jsp").forward(request, response);
+
+                }
+
+            }
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

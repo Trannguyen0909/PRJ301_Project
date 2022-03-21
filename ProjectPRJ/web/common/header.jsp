@@ -25,6 +25,16 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="Home">Home</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="MainController?action=searchAdmin&keyword="  aria-expanded="">
+                                    Manager User
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="MainController?action=searchGroup&keyword="  aria-expanded="">
+                                    Manager Group
+                                </a>
+                            </li>
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -5,6 +5,8 @@
  */
 package controller.admin;
 
+import dal.GroupDAO;
+import error.GroupError;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,15 +14,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.Builder;
+import model.Group;
+import utils.CheckValidation;
 
 /**
  *
- * @author FPTSHOP-ACER
+ * @author Fang Long
  */
-@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
-public class MainController extends HttpServlet {
-
-    private static String url = "Notfound.jsp";
+@WebServlet(name = "InsertGroupAdminController", urlPatterns = {"/InsertGroupAdminController"})
+public class InsertGroupAdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,44 +38,56 @@ public class MainController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            String action = request.getParameter("action");
-            if (action == null || action.isEmpty()) {
+            int groupValue = Integer.parseInt(request.getParameter("txtgroupvalue"));
+            String GroupName = request.getParameter("txtgroupname");
+            String FromDate = request.getParameter("txtfromdate");
+            String ToDate = request.getParameter("txttodate");
+            int Quantity = Integer.parseInt(request.getParameter("txtquantity"));
+            int Price = Integer.parseInt(request.getParameter("txtprice"));
 
-            } else if (action.equals("insertAdmin")) {
-                url = "InsertAccountController";
-            } else if (action.equals("deleteAdmin")) {
-                url = "DeleteAccountController";
-            } else if (action.equals("updateAdmin")) {
-                url = "UpdateAdminController";
-            } else if (action.equals("insertAdminPage")) {
-                url = "insertAccount.jsp";
-            }else if(action.equals("updateAdminPage")){
-                url = "UpdateAdminPageController";
-            }
-            
-            
-            else if (action.equals("searchAdmin")) {
-                url = "SearchAccountController";
-            }else if(action.equals("activeAdmin")){
-                url = "ActiveAdminController";
-                
-            }
-            
-            else if (action.equals("searchGroup")) {
-                url = "SearchGroupController";
-            } else if (action.equals("insertGroupAdminPage")) {
-                url = "InsertAdminGroupPageController";
+            String msg = "";
+            boolean check = true;
+            GroupError groupError = new GroupError("", "", "", "", "", "", "", "");
 
-            }else if(action.equals("insertGroupAdmin")){
-                url = "InsertGroupAdminController";
-            }else if(action.equals("updateGroupStatus")){
-                url = "UpdateGroupStatusController";
+            if (!CheckValidation.isValidStrings(GroupName)) {
+                msg = "GroupName not format!";
+                check = false;
+                groupError.setGroupNameError(msg);
+            }
+
+            if (Quantity < 0) {
+                msg = "Quantity to Small";
+                check = false;
+                groupError.setQuantityError(msg);
+            }
+            if (Price < 0) {
+                msg = "Price to Small";
+                check = false;
+                groupError.setPriceError(msg);
+            }
+
+            if (check) {
+                Group group = Group.builder()
+                        .groupValue(groupValue)
+                        .groupName(GroupName)
+                        .from_date(FromDate)
+                        .to_date(ToDate)
+                        .quantity(Quantity)
+                        .price(Price)
+                        .status(true)
+                        .build();
+
+                if (GroupDAO.insertGroup(group)) {
+                    request.getRequestDispatcher("MainController?action=searchGroup&keyword=").forward(request, response);
+                }
+
+            } else {
+                request.setAttribute("GROUP_ERROR", groupError);
+                request.getRequestDispatcher("insertGroup.jsp").forward(request, response);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

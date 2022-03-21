@@ -15,12 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author FPTSHOP-ACER
+ * @author Fang Long
  */
-@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
-public class MainController extends HttpServlet {
-
-    private static String url = "Notfound.jsp";
+@WebServlet(name = "InsertAdminGroupPageController", urlPatterns = {"/InsertAdminGroupPageController"})
+public class InsertAdminGroupPageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,44 +33,11 @@ public class MainController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            String action = request.getParameter("action");
-            if (action == null || action.isEmpty()) {
 
-            } else if (action.equals("insertAdmin")) {
-                url = "InsertAccountController";
-            } else if (action.equals("deleteAdmin")) {
-                url = "DeleteAccountController";
-            } else if (action.equals("updateAdmin")) {
-                url = "UpdateAdminController";
-            } else if (action.equals("insertAdminPage")) {
-                url = "insertAccount.jsp";
-            }else if(action.equals("updateAdminPage")){
-                url = "UpdateAdminPageController";
-            }
-            
-            
-            else if (action.equals("searchAdmin")) {
-                url = "SearchAccountController";
-            }else if(action.equals("activeAdmin")){
-                url = "ActiveAdminController";
-                
-            }
-            
-            else if (action.equals("searchGroup")) {
-                url = "SearchGroupController";
-            } else if (action.equals("insertGroupAdminPage")) {
-                url = "InsertAdminGroupPageController";
-
-            }else if(action.equals("insertGroupAdmin")){
-                url = "InsertGroupAdminController";
-            }else if(action.equals("updateGroupStatus")){
-                url = "UpdateGroupStatusController";
-            }
+            request.getRequestDispatcher("insertGroup.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

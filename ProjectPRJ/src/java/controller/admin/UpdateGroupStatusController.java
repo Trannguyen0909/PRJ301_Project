@@ -5,6 +5,7 @@
  */
 package controller.admin;
 
+import dal.GroupDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,12 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author FPTSHOP-ACER
+ * @author Fang Long
  */
-@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
-public class MainController extends HttpServlet {
-
-    private static String url = "Notfound.jsp";
+@WebServlet(name = "UpdateGroupStatusController", urlPatterns = {"/UpdateGroupStatusController"})
+public class UpdateGroupStatusController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,44 +34,18 @@ public class MainController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            String action = request.getParameter("action");
-            if (action == null || action.isEmpty()) {
+            int groupid = Integer.parseInt(request.getParameter("groupid"));
+            boolean status = Boolean.parseBoolean(request.getParameter("status"));
 
-            } else if (action.equals("insertAdmin")) {
-                url = "InsertAccountController";
-            } else if (action.equals("deleteAdmin")) {
-                url = "DeleteAccountController";
-            } else if (action.equals("updateAdmin")) {
-                url = "UpdateAdminController";
-            } else if (action.equals("insertAdminPage")) {
-                url = "insertAccount.jsp";
-            }else if(action.equals("updateAdminPage")){
-                url = "UpdateAdminPageController";
-            }
-            
-            
-            else if (action.equals("searchAdmin")) {
-                url = "SearchAccountController";
-            }else if(action.equals("activeAdmin")){
-                url = "ActiveAdminController";
-                
-            }
-            
-            else if (action.equals("searchGroup")) {
-                url = "SearchGroupController";
-            } else if (action.equals("insertGroupAdminPage")) {
-                url = "InsertAdminGroupPageController";
+            if (GroupDAO.updateGroupStatus(groupid, status)) {
+                request.getRequestDispatcher("MainController?action=searchGroup&keyword=&page=1").forward(request, response);
+            } else {
+                request.getRequestDispatcher("MainController?action=searchGroup&keyword=&page=1").forward(request, response);
 
-            }else if(action.equals("insertGroupAdmin")){
-                url = "InsertGroupAdminController";
-            }else if(action.equals("updateGroupStatus")){
-                url = "UpdateGroupStatusController";
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            log("ERROR AT UPDATE GROUP STATUS:" + e.toString());
         }
     }
 
